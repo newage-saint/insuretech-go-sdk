@@ -1,0 +1,13 @@
+package models
+
+// OTPType represents a otp_type
+type OTPType string
+
+// OTPType values
+const (
+	OTPTypeOTPTYPEUNSPECIFIED   OTPType = "OTP_TYPE_UNSPECIFIED"
+	OTPTypeOTPTYPEREGISTRATION          = "OTP_TYPE_REGISTRATION"
+	OTPTypeOTPTYPELOGIN                 = "OTP_TYPE_LOGIN"
+	OTPTypeOTPTYPEPASSWORDRESET         = "OTP_TYPE_PASSWORD_RESET"
+	OTPTypeOTPTYPETRANSACTION           = "OTP_TYPE_TRANSACTION"
+)
