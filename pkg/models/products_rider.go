@@ -6,15 +6,15 @@ import (
 
 // ProductsRider represents a products_rider
 type ProductsRider struct {
-	PremiumAmount    *Money    `json:"premium_amount,omitempty"`
+	ProductId        string    `json:"product_id,omitempty"`
+	RiderName        string    `json:"rider_name,omitempty"`
 	CoverageAmount   *Money    `json:"coverage_amount,omitempty"`
-	IsMandatory      bool      `json:"is_mandatory,omitempty"`
 	UpdatedAt        time.Time `json:"updated_at,omitempty"`
 	PremiumCurrency  string    `json:"premium_currency,omitempty"`
 	RiderId          string    `json:"rider_id,omitempty"`
-	ProductId        string    `json:"product_id,omitempty"`
+	Description      string    `json:"description,omitempty"`
+	PremiumAmount    *Money    `json:"premium_amount,omitempty"`
+	IsMandatory      bool      `json:"is_mandatory,omitempty"`
 	CreatedAt        time.Time `json:"created_at,omitempty"`
 	CoverageCurrency string    `json:"coverage_currency,omitempty"`
-	RiderName        string    `json:"rider_name,omitempty"`
-	Description      string    `json:"description,omitempty"`
 }

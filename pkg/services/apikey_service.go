@@ -11,28 +11,6 @@ type ApikeyService struct {
 	Client Client
 }
 
-// ListApiKeys List API keys for owner
-func (s *ApikeyService) ListApiKeys(ctx context.Context) (*models.ApiKeysListingResponse, error) {
-	path := "/v1/api-keys"
-	var result models.ApiKeysListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GenerateApiKey Generate new API key for insurer/partner
-func (s *ApikeyService) GenerateApiKey(ctx context.Context, req *models.ApiKeyGenerationRequest) (*models.ApiKeyGenerationResponse, error) {
-	path := "/v1/api-keys"
-	var result models.ApiKeyGenerationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // RevokeApiKey Revoke API key
 func (s *ApikeyService) RevokeApiKey(ctx context.Context, apiKeyId string) error {
 	path := "/v1/api-keys/{api_key_id}"
@@ -57,6 +35,28 @@ func (s *ApikeyService) GetApiKey(ctx context.Context, apiKeyId string) (*models
 	path := "/v1/api-keys/{api_key_id}"
 	path = strings.ReplaceAll(path, "{api_key_id}", apiKeyId)
 	var result models.ApiKeyRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GenerateApiKey Generate new API key for insurer/partner
+func (s *ApikeyService) GenerateApiKey(ctx context.Context, req *models.ApiKeyGenerationRequest) (*models.ApiKeyGenerationResponse, error) {
+	path := "/v1/api-keys"
+	var result models.ApiKeyGenerationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// ListApiKeys List API keys for owner
+func (s *ApikeyService) ListApiKeys(ctx context.Context) (*models.ApiKeysListingResponse, error) {
+	path := "/v1/api-keys"
+	var result models.ApiKeysListingResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err

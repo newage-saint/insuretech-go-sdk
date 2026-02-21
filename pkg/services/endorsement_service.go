@@ -11,30 +11,6 @@ type EndorsementService struct {
 	Client Client
 }
 
-// RequestEndorsement Request endorsement
-func (s *EndorsementService) RequestEndorsement(ctx context.Context, policyId string, req *models.RequestEndorsementRequest) (*models.RequestEndorsementResponse, error) {
-	path := "/v1/policies/{policy_id}/endorsements"
-	path = strings.ReplaceAll(path, "{policy_id}", policyId)
-	var result models.RequestEndorsementResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// ListEndorsements List endorsements for policy
-func (s *EndorsementService) ListEndorsements(ctx context.Context, policyId string) (*models.EndorsementsListingResponse, error) {
-	path := "/v1/policies/{policy_id}/endorsements"
-	path = strings.ReplaceAll(path, "{policy_id}", policyId)
-	var result models.EndorsementsListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // GetEndorsement Get endorsement
 func (s *EndorsementService) GetEndorsement(ctx context.Context, endorsementId string) (*models.EndorsementRetrievalResponse, error) {
 	path := "/v1/endorsements/{endorsement_id}"
@@ -53,6 +29,30 @@ func (s *EndorsementService) ApproveEndorsement(ctx context.Context, endorsement
 	path = strings.ReplaceAll(path, "{endorsement_id}", endorsementId)
 	var result models.EndorsementApprovalResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// RequestEndorsement Request endorsement
+func (s *EndorsementService) RequestEndorsement(ctx context.Context, policyId string, req *models.RequestEndorsementRequest) (*models.RequestEndorsementResponse, error) {
+	path := "/v1/policies/{policy_id}/endorsements"
+	path = strings.ReplaceAll(path, "{policy_id}", policyId)
+	var result models.RequestEndorsementResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// ListEndorsements List endorsements for policy
+func (s *EndorsementService) ListEndorsements(ctx context.Context, policyId string) (*models.EndorsementsListingResponse, error) {
+	path := "/v1/policies/{policy_id}/endorsements"
+	path = strings.ReplaceAll(path, "{policy_id}", policyId)
+	var result models.EndorsementsListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}

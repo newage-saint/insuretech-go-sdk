@@ -11,18 +11,6 @@ type UnderwritingService struct {
 	Client Client
 }
 
-// GetUnderwritingDecision Get underwriting decision
-func (s *UnderwritingService) GetUnderwritingDecision(ctx context.Context, quoteId string) (*models.UnderwritingDecisionRetrievalResponse, error) {
-	path := "/v1/quotes/{quote_id}/decision"
-	path = strings.ReplaceAll(path, "{quote_id}", quoteId)
-	var result models.UnderwritingDecisionRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // SubmitHealthDeclaration Submit health declaration
 func (s *UnderwritingService) SubmitHealthDeclaration(ctx context.Context, quoteId string, req *models.HealthDeclarationSubmissionRequest) (*models.HealthDeclarationSubmissionResponse, error) {
 	path := "/v1/quotes/{quote_id}/health-declaration"
@@ -47,22 +35,23 @@ func (s *UnderwritingService) GetHealthDeclaration(ctx context.Context, quoteId 
 	return &result, nil
 }
 
-// RequestQuote Request premium quote
-func (s *UnderwritingService) RequestQuote(ctx context.Context, req *models.RequestQuoteRequest) (*models.RequestQuoteResponse, error) {
-	path := "/v1/quotes"
-	var result models.RequestQuoteResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+// ListQuotes List quotes for beneficiary
+func (s *UnderwritingService) ListQuotes(ctx context.Context, beneficiaryId string) (*models.QuotesListingResponse, error) {
+	path := "/v1/beneficiaries/{beneficiary_id}/quotes"
+	path = strings.ReplaceAll(path, "{beneficiary_id}", beneficiaryId)
+	var result models.QuotesListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
 	return &result, nil
 }
 
-// ListQuotes List quotes for beneficiary
-func (s *UnderwritingService) ListQuotes(ctx context.Context, beneficiaryId string) (*models.QuotesListingResponse, error) {
-	path := "/v1/beneficiaries/{beneficiary_id}/quotes"
-	path = strings.ReplaceAll(path, "{beneficiary_id}", beneficiaryId)
-	var result models.QuotesListingResponse
+// GetUnderwritingDecision Get underwriting decision
+func (s *UnderwritingService) GetUnderwritingDecision(ctx context.Context, quoteId string) (*models.UnderwritingDecisionRetrievalResponse, error) {
+	path := "/v1/quotes/{quote_id}/decision"
+	path = strings.ReplaceAll(path, "{quote_id}", quoteId)
+	var result models.UnderwritingDecisionRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
@@ -87,6 +76,17 @@ func (s *UnderwritingService) ApproveUnderwriting(ctx context.Context, quoteId s
 	path := "/v1/quotes/{quote_id}"
 	path = strings.ReplaceAll(path, "{quote_id}", quoteId)
 	var result models.UnderwritingApprovalResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// RequestQuote Request premium quote
+func (s *UnderwritingService) RequestQuote(ctx context.Context, req *models.RequestQuoteRequest) (*models.RequestQuoteResponse, error) {
+	path := "/v1/quotes"
+	var result models.RequestQuoteResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

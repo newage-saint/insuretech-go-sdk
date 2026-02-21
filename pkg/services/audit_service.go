@@ -22,19 +22,6 @@ func (s *AuditService) GenerateComplianceReport(ctx context.Context, req *models
 	return &result, nil
 }
 
-// GetAuditTrail Get audit trail for entity
-func (s *AuditService) GetAuditTrail(ctx context.Context, entityType string, entityId string) (*models.AuditTrailRetrievalResponse, error) {
-	path := "/v1/entities/{entity_type}/{entity_id}/audit-trail"
-	path = strings.ReplaceAll(path, "{entity_type}", entityType)
-	path = strings.ReplaceAll(path, "{entity_id}", entityId)
-	var result models.AuditTrailRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // CreateComplianceLog Create compliance log
 func (s *AuditService) CreateComplianceLog(ctx context.Context, req *models.ComplianceLogCreationRequest) (*models.ComplianceLogCreationResponse, error) {
 	path := "/v1/compliance-logs"
@@ -50,6 +37,28 @@ func (s *AuditService) CreateComplianceLog(ctx context.Context, req *models.Comp
 func (s *AuditService) GetComplianceLogs(ctx context.Context) (*models.ComplianceLogsRetrievalResponse, error) {
 	path := "/v1/compliance-logs"
 	var result models.ComplianceLogsRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// CreateAuditEvent Create audit event
+func (s *AuditService) CreateAuditEvent(ctx context.Context, req *models.AuditEventCreationRequest) (*models.AuditEventCreationResponse, error) {
+	path := "/v1/audit-events"
+	var result models.AuditEventCreationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetAuditEvents Get audit events
+func (s *AuditService) GetAuditEvents(ctx context.Context) (*models.AuditEventsRetrievalResponse, error) {
+	path := "/v1/audit-events"
+	var result models.AuditEventsRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
@@ -79,21 +88,12 @@ func (s *AuditService) GetAuditLogs(ctx context.Context) (*models.AuditLogsRetri
 	return &result, nil
 }
 
-// CreateAuditEvent Create audit event
-func (s *AuditService) CreateAuditEvent(ctx context.Context, req *models.AuditEventCreationRequest) (*models.AuditEventCreationResponse, error) {
-	path := "/v1/audit-events"
-	var result models.AuditEventCreationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GetAuditEvents Get audit events
-func (s *AuditService) GetAuditEvents(ctx context.Context) (*models.AuditEventsRetrievalResponse, error) {
-	path := "/v1/audit-events"
-	var result models.AuditEventsRetrievalResponse
+// GetAuditTrail Get audit trail for entity
+func (s *AuditService) GetAuditTrail(ctx context.Context, entityType string, entityId string) (*models.AuditTrailRetrievalResponse, error) {
+	path := "/v1/entities/{entity_type}/{entity_id}/audit-trail"
+	path = strings.ReplaceAll(path, "{entity_type}", entityType)
+	path = strings.ReplaceAll(path, "{entity_id}", entityId)
+	var result models.AuditTrailRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err

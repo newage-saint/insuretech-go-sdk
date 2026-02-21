@@ -6,19 +6,19 @@ import (
 
 // MFSTransaction represents a mfs_transaction
 type MFSTransaction struct {
-	MfsIntegrationId      string           `json:"mfs_integration_id"`
-	PaymentId             string           `json:"payment_id,omitempty"`
+	Provider              string           `json:"provider"`
 	ProviderTransactionId string           `json:"provider_transaction_id,omitempty"`
-	Amount                *Money           `json:"amount,omitempty"`
-	RequestPayload        string           `json:"request_payload,omitempty"`
-	TransactionId         string           `json:"transaction_id"`
+	PaymentId             string           `json:"payment_id,omitempty"`
 	Type                  *TransactionType `json:"type"`
-	CustomerMsisdn        string           `json:"customer_msisdn"`
 	Status                interface{}      `json:"status"`
 	ResponsePayload       string           `json:"response_payload,omitempty"`
 	ErrorMessage          string           `json:"error_message,omitempty"`
-	CompletedAt           time.Time        `json:"completed_at,omitempty"`
 	AuditInfo             interface{}      `json:"audit_info"`
+	TransactionId         string           `json:"transaction_id"`
+	MfsIntegrationId      string           `json:"mfs_integration_id"`
+	Amount                *Money           `json:"amount,omitempty"`
+	CustomerMsisdn        string           `json:"customer_msisdn"`
 	Id                    string           `json:"id"`
-	Provider              string           `json:"provider"`
+	RequestPayload        string           `json:"request_payload,omitempty"`
+	CompletedAt           time.Time        `json:"completed_at,omitempty"`
 }

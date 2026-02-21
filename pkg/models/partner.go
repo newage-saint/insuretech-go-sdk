@@ -6,25 +6,25 @@ import (
 
 // Partner represents a partner
 type Partner struct {
+	ContactEmail              string               `json:"contact_email"`
+	DeletedAt                 time.Time            `json:"deleted_at,omitempty"`
+	Commission                *CommissionStructure `json:"commission,omitempty"`
 	OrganizationName          string               `json:"organization_name"`
 	Status                    interface{}          `json:"status"`
-	TinNumber                 string               `json:"tin_number"`
-	ContactPhone              string               `json:"contact_phone"`
-	BankName                  string               `json:"bank_name,omitempty"`
-	RenewalCommissionRate     float64              `json:"renewal_commission_rate"`
 	OnboardedAt               time.Time            `json:"onboarded_at,omitempty"`
-	DeletedAt                 time.Time            `json:"deleted_at,omitempty"`
-	Type                      *PartnerType         `json:"type"`
-	TradeLicense              string               `json:"trade_license"`
-	BankAccount               string               `json:"bank_account"`
-	UpdatedAt                 time.Time            `json:"updated_at"`
-	BankBranch                string               `json:"bank_branch,omitempty"`
-	ContactEmail              string               `json:"contact_email"`
-	AcquisitionCommissionRate float64              `json:"acquisition_commission_rate"`
-	ClaimsAssistanceRate      float64              `json:"claims_assistance_rate,omitempty"`
 	CreatedAt                 time.Time            `json:"created_at"`
-	FocalPersonId             string               `json:"focal_person_id,omitempty"`
-	Commission                *CommissionStructure `json:"commission,omitempty"`
+	UpdatedAt                 time.Time            `json:"updated_at"`
+	ContactPhone              string               `json:"contact_phone"`
+	ClaimsAssistanceRate      float64              `json:"claims_assistance_rate,omitempty"`
 	Benefits                  *PartnerBenefits     `json:"benefits,omitempty"`
 	PartnerId                 string               `json:"partner_id"`
+	BankName                  string               `json:"bank_name,omitempty"`
+	AcquisitionCommissionRate float64              `json:"acquisition_commission_rate"`
+	RenewalCommissionRate     float64              `json:"renewal_commission_rate"`
+	FocalPersonId             string               `json:"focal_person_id,omitempty"`
+	Type                      *PartnerType         `json:"type"`
+	TradeLicense              string               `json:"trade_license"`
+	TinNumber                 string               `json:"tin_number"`
+	BankAccount               string               `json:"bank_account"`
+	BankBranch                string               `json:"bank_branch,omitempty"`
 }

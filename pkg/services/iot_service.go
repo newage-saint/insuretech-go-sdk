@@ -11,22 +11,10 @@ type IotService struct {
 	Client Client
 }
 
-// SendTelemetry Send telemetry data
-func (s *IotService) SendTelemetry(ctx context.Context, req *models.TelemetrySendingRequest) (*models.TelemetrySendingResponse, error) {
-	path := "/v1/iot/telemetry"
-	var result models.TelemetrySendingResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// DeactivateDevice Deactivate device
-func (s *IotService) DeactivateDevice(ctx context.Context, deviceId string, req *models.DeviceDeactivationRequest) (*models.DeviceDeactivationResponse, error) {
-	path := "/v1/iot/devices/{device_id}:deactivate"
-	path = strings.ReplaceAll(path, "{device_id}", deviceId)
-	var result models.DeviceDeactivationResponse
+// RegisterDevice Register device
+func (s *IotService) RegisterDevice(ctx context.Context, req *models.DeviceRegistrationRequest) (*models.DeviceRegistrationResponse, error) {
+	path := "/v1/iot/devices"
+	var result models.DeviceRegistrationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -46,6 +34,18 @@ func (s *IotService) GetDeviceStatus(ctx context.Context, deviceId string) (*mod
 	return &result, nil
 }
 
+// DeactivateDevice Deactivate device
+func (s *IotService) DeactivateDevice(ctx context.Context, deviceId string, req *models.DeviceDeactivationRequest) (*models.DeviceDeactivationResponse, error) {
+	path := "/v1/iot/devices/{device_id}:deactivate"
+	path = strings.ReplaceAll(path, "{device_id}", deviceId)
+	var result models.DeviceDeactivationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // GetRiskAssessment Get risk assessment
 func (s *IotService) GetRiskAssessment(ctx context.Context, deviceId string) (*models.RiskAssessmentRetrievalResponse, error) {
 	path := "/v1/iot/devices/{device_id}/risk"
@@ -58,10 +58,10 @@ func (s *IotService) GetRiskAssessment(ctx context.Context, deviceId string) (*m
 	return &result, nil
 }
 
-// RegisterDevice Register device
-func (s *IotService) RegisterDevice(ctx context.Context, req *models.DeviceRegistrationRequest) (*models.DeviceRegistrationResponse, error) {
-	path := "/v1/iot/devices"
-	var result models.DeviceRegistrationResponse
+// SendTelemetry Send telemetry data
+func (s *IotService) SendTelemetry(ctx context.Context, req *models.TelemetrySendingRequest) (*models.TelemetrySendingResponse, error) {
+	path := "/v1/iot/telemetry"
+	var result models.TelemetrySendingResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

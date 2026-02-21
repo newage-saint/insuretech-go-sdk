@@ -11,11 +11,23 @@ type TaskService struct {
 	Client Client
 }
 
-// ListMyTasks List my tasks
-func (s *TaskService) ListMyTasks(ctx context.Context) (*models.MyTasksListingResponse, error) {
-	path := "/v1/tasks/my-tasks"
-	var result models.MyTasksListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+// CreateTask Create task
+func (s *TaskService) CreateTask(ctx context.Context, req *models.TaskCreationRequest) (*models.TaskCreationResponse, error) {
+	path := "/v1/tasks"
+	var result models.TaskCreationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// AssignTask Assign task
+func (s *TaskService) AssignTask(ctx context.Context, taskId string, req *models.TaskAssignmentRequest) (*models.TaskAssignmentResponse, error) {
+	path := "/v1/tasks/{task_id}"
+	path = strings.ReplaceAll(path, "{task_id}", taskId)
+	var result models.TaskAssignmentResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -46,23 +58,11 @@ func (s *TaskService) UpdateTask(ctx context.Context, taskId string, req *models
 	return &result, nil
 }
 
-// AssignTask Assign task
-func (s *TaskService) AssignTask(ctx context.Context, taskId string, req *models.TaskAssignmentRequest) (*models.TaskAssignmentResponse, error) {
-	path := "/v1/tasks/{task_id}"
-	path = strings.ReplaceAll(path, "{task_id}", taskId)
-	var result models.TaskAssignmentResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// CreateTask Create task
-func (s *TaskService) CreateTask(ctx context.Context, req *models.TaskCreationRequest) (*models.TaskCreationResponse, error) {
-	path := "/v1/tasks"
-	var result models.TaskCreationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+// ListMyTasks List my tasks
+func (s *TaskService) ListMyTasks(ctx context.Context) (*models.MyTasksListingResponse, error) {
+	path := "/v1/tasks/my-tasks"
+	var result models.MyTasksListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}

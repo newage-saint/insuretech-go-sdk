@@ -6,26 +6,26 @@ import (
 
 // Payment represents a payment
 type Payment struct {
-	TigerbeetleTransferId string                `json:"tigerbeetle_transfer_id,omitempty"`
-	Type                  *PaymentType          `json:"type"`
-	Currency              string                `json:"currency"`
-	InitiatedAt           time.Time             `json:"initiated_at"`
-	UpdatedAt             time.Time             `json:"updated_at"`
-	ClaimId               string                `json:"claim_id,omitempty"`
-	Status                interface{}           `json:"status"`
-	Amount                *Money                `json:"amount"`
-	PayerId               string                `json:"payer_id"`
-	CompletedAt           time.Time             `json:"completed_at,omitempty"`
-	RetryCount            int                   `json:"retry_count"`
-	PaymentId             string                `json:"payment_id"`
-	Method                *PaymentPaymentMethod `json:"method"`
 	CreatedAt             time.Time             `json:"created_at"`
-	FailureReason         string                `json:"failure_reason,omitempty"`
+	UpdatedAt             time.Time             `json:"updated_at"`
+	TigerbeetleTransferId string                `json:"tigerbeetle_transfer_id,omitempty"`
+	RetryCount            int                   `json:"retry_count"`
 	IdempotencyKey        string                `json:"idempotency_key,omitempty"`
-	TransactionId         string                `json:"transaction_id,omitempty"`
-	PolicyId              string                `json:"policy_id,omitempty"`
-	PayeeId               string                `json:"payee_id,omitempty"`
+	PayerId               string                `json:"payer_id"`
+	InitiatedAt           time.Time             `json:"initiated_at"`
 	Gateway               string                `json:"gateway,omitempty"`
 	GatewayResponse       string                `json:"gateway_response,omitempty"`
 	ReceiptUrl            string                `json:"receipt_url,omitempty"`
+	TransactionId         string                `json:"transaction_id,omitempty"`
+	Type                  *PaymentType          `json:"type"`
+	Status                interface{}           `json:"status"`
+	Currency              string                `json:"currency"`
+	CompletedAt           time.Time             `json:"completed_at,omitempty"`
+	FailureReason         string                `json:"failure_reason,omitempty"`
+	PaymentId             string                `json:"payment_id"`
+	PolicyId              string                `json:"policy_id,omitempty"`
+	ClaimId               string                `json:"claim_id,omitempty"`
+	Method                *PaymentPaymentMethod `json:"method"`
+	Amount                *Money                `json:"amount"`
+	PayeeId               string                `json:"payee_id,omitempty"`
 }

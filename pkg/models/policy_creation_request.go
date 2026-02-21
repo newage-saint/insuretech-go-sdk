@@ -4,12 +4,12 @@ package models
 type PolicyCreationRequest struct {
 	Riders        []*PolicyRider `json:"riders,omitempty"`
 	PremiumAmount *Money         `json:"premium_amount,omitempty"`
-	ProductId     string         `json:"product_id"`
 	CustomerId    string         `json:"customer_id"`
+	PartnerId     string         `json:"partner_id"`
 	AgentId       string         `json:"agent_id"`
-	Applicant     *Applicant     `json:"applicant,omitempty"`
 	SumInsured    *Money         `json:"sum_insured,omitempty"`
 	TenureMonths  int            `json:"tenure_months,omitempty"`
-	PartnerId     string         `json:"partner_id"`
+	ProductId     string         `json:"product_id"`
+	Applicant     *Applicant     `json:"applicant,omitempty"`
 	Nominees      []*Nominee     `json:"nominees,omitempty"`
 }

@@ -11,11 +11,10 @@ type VoiceService struct {
 	Client Client
 }
 
-// ProcessVoiceCommand Process voice command
-func (s *VoiceService) ProcessVoiceCommand(ctx context.Context, voiceSessionId string, req *models.VoiceCommandProcessingRequest) (*models.VoiceCommandProcessingResponse, error) {
-	path := "/v1/voice-sessions/{voice_session_id}/commands"
-	path = strings.ReplaceAll(path, "{voice_session_id}", voiceSessionId)
-	var result models.VoiceCommandProcessingResponse
+// StartVoiceSession Start voice session
+func (s *VoiceService) StartVoiceSession(ctx context.Context, req *models.VoiceSessionStartRequest) (*models.VoiceSessionStartResponse, error) {
+	path := "/v1/voice-sessions"
+	var result models.VoiceSessionStartResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -29,6 +28,18 @@ func (s *VoiceService) GetTranscript(ctx context.Context, voiceSessionId string)
 	path = strings.ReplaceAll(path, "{voice_session_id}", voiceSessionId)
 	var result models.TranscriptRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// ProcessVoiceCommand Process voice command
+func (s *VoiceService) ProcessVoiceCommand(ctx context.Context, voiceSessionId string, req *models.VoiceCommandProcessingRequest) (*models.VoiceCommandProcessingResponse, error) {
+	path := "/v1/voice-sessions/{voice_session_id}/commands"
+	path = strings.ReplaceAll(path, "{voice_session_id}", voiceSessionId)
+	var result models.VoiceCommandProcessingResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -52,17 +63,6 @@ func (s *VoiceService) EndVoiceSession(ctx context.Context, voiceSessionId strin
 	path := "/v1/voice-sessions/{voice_session_id}"
 	path = strings.ReplaceAll(path, "{voice_session_id}", voiceSessionId)
 	var result models.EndVoiceSessionResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// StartVoiceSession Start voice session
-func (s *VoiceService) StartVoiceSession(ctx context.Context, req *models.VoiceSessionStartRequest) (*models.VoiceSessionStartResponse, error) {
-	path := "/v1/voice-sessions"
-	var result models.VoiceSessionStartResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

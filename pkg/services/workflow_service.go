@@ -23,40 +23,6 @@ func (s *WorkflowService) GetWorkflowInstance(ctx context.Context, workflowInsta
 	return &result, nil
 }
 
-// GetMyTasks Get my tasks
-func (s *WorkflowService) GetMyTasks(ctx context.Context) (*models.MyTasksRetrievalResponse, error) {
-	path := "/v1/workflow-tasks/my-tasks"
-	var result models.MyTasksRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// CompleteTask Complete task
-func (s *WorkflowService) CompleteTask(ctx context.Context, taskId string, req *models.WorkflowTaskCompletionRequest) (*models.WorkflowTaskCompletionResponse, error) {
-	path := "/v1/workflow-tasks/{task_id}"
-	path = strings.ReplaceAll(path, "{task_id}", taskId)
-	var result models.WorkflowTaskCompletionResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// CreateWorkflowDefinition Create workflow definition
-func (s *WorkflowService) CreateWorkflowDefinition(ctx context.Context, req *models.WorkflowDefinitionCreationRequest) (*models.WorkflowDefinitionCreationResponse, error) {
-	path := "/v1/workflow-definitions"
-	var result models.WorkflowDefinitionCreationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // GetWorkflowHistory Get workflow history for entity
 func (s *WorkflowService) GetWorkflowHistory(ctx context.Context, entityType string, entityId string) (*models.WorkflowHistoryRetrievalResponse, error) {
 	path := "/v1/entities/{entity_type}/{entity_id}/workflow-history"
@@ -86,6 +52,40 @@ func (s *WorkflowService) GetWorkflowDefinition(ctx context.Context, workflowDef
 func (s *WorkflowService) StartWorkflow(ctx context.Context, req *models.WorkflowStartRequest) (*models.WorkflowStartResponse, error) {
 	path := "/v1/workflow-instances"
 	var result models.WorkflowStartResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// CompleteTask Complete task
+func (s *WorkflowService) CompleteTask(ctx context.Context, taskId string, req *models.WorkflowTaskCompletionRequest) (*models.WorkflowTaskCompletionResponse, error) {
+	path := "/v1/workflow-tasks/{task_id}"
+	path = strings.ReplaceAll(path, "{task_id}", taskId)
+	var result models.WorkflowTaskCompletionResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetMyTasks Get my tasks
+func (s *WorkflowService) GetMyTasks(ctx context.Context) (*models.MyTasksRetrievalResponse, error) {
+	path := "/v1/workflow-tasks/my-tasks"
+	var result models.MyTasksRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// CreateWorkflowDefinition Create workflow definition
+func (s *WorkflowService) CreateWorkflowDefinition(ctx context.Context, req *models.WorkflowDefinitionCreationRequest) (*models.WorkflowDefinitionCreationResponse, error) {
+	path := "/v1/workflow-definitions"
+	var result models.WorkflowDefinitionCreationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

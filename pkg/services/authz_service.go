@@ -11,11 +11,24 @@ type AuthzService struct {
 	Client Client
 }
 
-// CreateRole Create custom role
-func (s *AuthzService) CreateRole(ctx context.Context, req *models.RoleCreationRequest) (*models.RoleCreationResponse, error) {
-	path := "/v1/roles"
-	var result models.RoleCreationResponse
+// AssignRole Assign role to user
+func (s *AuthzService) AssignRole(ctx context.Context, userId string, req *models.RoleAssignmentRequest) (*models.RoleAssignmentResponse, error) {
+	path := "/v1/users/{user_id}/roles"
+	path = strings.ReplaceAll(path, "{user_id}", userId)
+	var result models.RoleAssignmentResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetUserRoles Get user roles
+func (s *AuthzService) GetUserRoles(ctx context.Context, userId string) (*models.UserRolesRetrievalResponse, error) {
+	path := "/v1/users/{user_id}/roles"
+	path = strings.ReplaceAll(path, "{user_id}", userId)
+	var result models.UserRolesRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -41,23 +54,10 @@ func (s *AuthzService) CheckPermission(ctx context.Context, req *models.CheckPer
 	return &result, nil
 }
 
-// GetUserRoles Get user roles
-func (s *AuthzService) GetUserRoles(ctx context.Context, userId string) (*models.UserRolesRetrievalResponse, error) {
-	path := "/v1/users/{user_id}/roles"
-	path = strings.ReplaceAll(path, "{user_id}", userId)
-	var result models.UserRolesRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// AssignRole Assign role to user
-func (s *AuthzService) AssignRole(ctx context.Context, userId string, req *models.RoleAssignmentRequest) (*models.RoleAssignmentResponse, error) {
-	path := "/v1/users/{user_id}/roles"
-	path = strings.ReplaceAll(path, "{user_id}", userId)
-	var result models.RoleAssignmentResponse
+// EvaluatePolicy Evaluate access policy
+func (s *AuthzService) EvaluatePolicy(ctx context.Context, req *models.PolicyEvaluationRequest) (*models.PolicyEvaluationResponse, error) {
+	path := "/v1/authz/policies:evaluate"
+	var result models.PolicyEvaluationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -65,10 +65,10 @@ func (s *AuthzService) AssignRole(ctx context.Context, userId string, req *model
 	return &result, nil
 }
 
-// EvaluatePolicy Evaluate access policy
-func (s *AuthzService) EvaluatePolicy(ctx context.Context, req *models.PolicyEvaluationRequest) (*models.PolicyEvaluationResponse, error) {
-	path := "/v1/authz/policies:evaluate"
-	var result models.PolicyEvaluationResponse
+// CreateRole Create custom role
+func (s *AuthzService) CreateRole(ctx context.Context, req *models.RoleCreationRequest) (*models.RoleCreationResponse, error) {
+	path := "/v1/roles"
+	var result models.RoleCreationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

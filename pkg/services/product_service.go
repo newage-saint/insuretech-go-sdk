@@ -11,24 +11,12 @@ type ProductService struct {
 	Client Client
 }
 
-// GetProduct Get product details
-func (s *ProductService) GetProduct(ctx context.Context, productId string) (*models.ProductRetrievalResponse, error) {
-	path := "/v1/products/{product_id}"
+// DeactivateProduct Deactivate product
+func (s *ProductService) DeactivateProduct(ctx context.Context, productId string, req *models.ProductDeactivationRequest) (*models.ProductDeactivationResponse, error) {
+	path := "/v1/products/{product_id}:deactivate"
 	path = strings.ReplaceAll(path, "{product_id}", productId)
-	var result models.ProductRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// UpdateProduct Update product (admin)
-func (s *ProductService) UpdateProduct(ctx context.Context, productId string, req *models.ProductUpdateRequest) (*models.ProductUpdateResponse, error) {
-	path := "/v1/products/{product_id}"
-	path = strings.ReplaceAll(path, "{product_id}", productId)
-	var result models.ProductUpdateResponse
-	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
+	var result models.ProductDeactivationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -81,11 +69,11 @@ func (s *ProductService) CalculatePremium(ctx context.Context, productId string,
 	return &result, nil
 }
 
-// DeactivateProduct Deactivate product
-func (s *ProductService) DeactivateProduct(ctx context.Context, productId string, req *models.ProductDeactivationRequest) (*models.ProductDeactivationResponse, error) {
-	path := "/v1/products/{product_id}:deactivate"
+// DiscontinueProduct Discontinue product
+func (s *ProductService) DiscontinueProduct(ctx context.Context, productId string, req *models.DiscontinueProductRequest) (*models.DiscontinueProductResponse, error) {
+	path := "/v1/products/{product_id}:discontinue"
 	path = strings.ReplaceAll(path, "{product_id}", productId)
-	var result models.ProductDeactivationResponse
+	var result models.DiscontinueProductResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -93,12 +81,24 @@ func (s *ProductService) DeactivateProduct(ctx context.Context, productId string
 	return &result, nil
 }
 
-// DiscontinueProduct Discontinue product
-func (s *ProductService) DiscontinueProduct(ctx context.Context, productId string, req *models.DiscontinueProductRequest) (*models.DiscontinueProductResponse, error) {
-	path := "/v1/products/{product_id}:discontinue"
+// GetProduct Get product details
+func (s *ProductService) GetProduct(ctx context.Context, productId string) (*models.ProductRetrievalResponse, error) {
+	path := "/v1/products/{product_id}"
 	path = strings.ReplaceAll(path, "{product_id}", productId)
-	var result models.DiscontinueProductResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	var result models.ProductRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// UpdateProduct Update product (admin)
+func (s *ProductService) UpdateProduct(ctx context.Context, productId string, req *models.ProductUpdateRequest) (*models.ProductUpdateResponse, error) {
+	path := "/v1/products/{product_id}"
+	path = strings.ReplaceAll(path, "{product_id}", productId)
+	var result models.ProductUpdateResponse
+	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
 	if err != nil {
 		return nil, err
 	}

@@ -2,13 +2,13 @@ package models
 
 // Tenant represents a tenant
 type Tenant struct {
-	Name           string      `json:"name"`
-	Config         string      `json:"config,omitempty"`
-	Branding       string      `json:"branding,omitempty"`
 	TenantId       string      `json:"tenant_id"`
 	Code           string      `json:"code"`
+	ParentTenantId string      `json:"parent_tenant_id,omitempty"`
+	Config         string      `json:"config,omitempty"`
+	Name           string      `json:"name"`
 	Type           *TenantType `json:"type"`
 	Status         interface{} `json:"status"`
-	ParentTenantId string      `json:"parent_tenant_id,omitempty"`
+	Branding       string      `json:"branding,omitempty"`
 	AuditInfo      interface{} `json:"audit_info"`
 }
