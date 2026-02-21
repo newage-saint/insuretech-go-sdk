@@ -2,19 +2,19 @@ package models
 
 // InsurerConfig represents a insurer_config
 type InsurerConfig struct {
-	ApiVersion                string              `json:"api_version,omitempty"`
-	AuthType                  *AuthenticationType `json:"auth_type,omitempty"`
-	AuthCredentials           string              `json:"auth_credentials,omitempty"`
-	WebhookUrl                string              `json:"webhook_url,omitempty"`
+	ApiBaseUrl                string              `json:"api_base_url,omitempty"`
 	AutoUnderwritingEnabled   bool                `json:"auto_underwriting_enabled,omitempty"`
 	RealTimeClaimNotification bool                `json:"real_time_claim_notification,omitempty"`
+	PaymentTerms              string              `json:"payment_terms,omitempty"`
+	AuthType                  *AuthenticationType `json:"auth_type,omitempty"`
+	WebhookUrl                string              `json:"webhook_url,omitempty"`
+	BusinessModel             string              `json:"business_model,omitempty"`
+	AuditInfo                 interface{}         `json:"audit_info"`
 	WebhookSecret             string              `json:"webhook_secret,omitempty"`
 	ClaimSettlementDays       int                 `json:"claim_settlement_days,omitempty"`
-	PaymentTerms              string              `json:"payment_terms,omitempty"`
-	AuditInfo                 interface{}         `json:"audit_info"`
 	Id                        string              `json:"id"`
-	BusinessModel             string              `json:"business_model,omitempty"`
-	UnderwritingThreshold     int                 `json:"underwriting_threshold,omitempty"`
 	InsurerId                 string              `json:"insurer_id"`
-	ApiBaseUrl                string              `json:"api_base_url,omitempty"`
+	ApiVersion                string              `json:"api_version,omitempty"`
+	AuthCredentials           string              `json:"auth_credentials,omitempty"`
+	UnderwritingThreshold     int                 `json:"underwriting_threshold,omitempty"`
 }

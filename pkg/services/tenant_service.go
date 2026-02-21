@@ -59,22 +59,22 @@ func (s *TenantService) UpdateTenantConfig(ctx context.Context, tenantId string,
 	return &result, nil
 }
 
-// CreateTenant Create tenant
-func (s *TenantService) CreateTenant(ctx context.Context, req *models.TenantCreationRequest) (*models.TenantCreationResponse, error) {
+// ListTenants List tenants
+func (s *TenantService) ListTenants(ctx context.Context) (*models.TenantsListingResponse, error) {
 	path := "/v1/tenants"
-	var result models.TenantCreationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	var result models.TenantsListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
 	return &result, nil
 }
 
-// ListTenants List tenants
-func (s *TenantService) ListTenants(ctx context.Context) (*models.TenantsListingResponse, error) {
+// CreateTenant Create tenant
+func (s *TenantService) CreateTenant(ctx context.Context, req *models.TenantCreationRequest) (*models.TenantCreationResponse, error) {
 	path := "/v1/tenants"
-	var result models.TenantsListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	var result models.TenantCreationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}

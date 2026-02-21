@@ -6,14 +6,14 @@ import (
 
 // ComplianceLog represents a compliance_log
 type ComplianceLog struct {
+	Id          string            `json:"id"`
+	Type        *ComplianceType   `json:"type"`
 	EntityType  string            `json:"entity_type"`
 	EntityId    string            `json:"entity_id"`
+	Status      *ComplianceStatus `json:"status"`
+	Regulation  string            `json:"regulation"`
 	Description string            `json:"description"`
 	Evidence    string            `json:"evidence,omitempty"`
-	Timestamp   time.Time         `json:"timestamp"`
-	Id          string            `json:"id"`
-	Status      *ComplianceStatus `json:"status"`
 	PerformedBy string            `json:"performed_by,omitempty"`
-	Type        *ComplianceType   `json:"type"`
-	Regulation  string            `json:"regulation"`
+	Timestamp   time.Time         `json:"timestamp"`
 }

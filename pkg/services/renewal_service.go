@@ -11,6 +11,18 @@ type RenewalService struct {
 	Client Client
 }
 
+// RenewPolicy Renew policy manually
+func (s *RenewalService) RenewPolicy(ctx context.Context, policyId string, req *models.RenewalPolicyRenewalRequest) (*models.RenewalPolicyRenewalResponse, error) {
+	path := "/v1/policies/{policy_id}"
+	path = strings.ReplaceAll(path, "{policy_id}", policyId)
+	var result models.RenewalPolicyRenewalResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // GetRenewalSchedule Get renewal schedule
 func (s *RenewalService) GetRenewalSchedule(ctx context.Context, policyId string) (*models.RenewalScheduleRetrievalResponse, error) {
 	path := "/v1/policies/{policy_id}/renewal-schedule"
@@ -28,18 +40,6 @@ func (s *RenewalService) SendRenewalReminder(ctx context.Context, renewalSchedul
 	path := "/v1/renewal-schedules/{renewal_schedule_id}/reminders"
 	path = strings.ReplaceAll(path, "{renewal_schedule_id}", renewalScheduleId)
 	var result models.RenewalReminderSendingResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// RenewPolicy Renew policy manually
-func (s *RenewalService) RenewPolicy(ctx context.Context, policyId string, req *models.RenewalPolicyRenewalRequest) (*models.RenewalPolicyRenewalResponse, error) {
-	path := "/v1/policies/{policy_id}"
-	path = strings.ReplaceAll(path, "{policy_id}", policyId)
-	var result models.RenewalPolicyRenewalResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

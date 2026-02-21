@@ -6,15 +6,15 @@ import (
 
 // AIDecisionMadeEvent represents a ai_decision_made_event
 type AIDecisionMadeEvent struct {
-	EntityType      string    `json:"entity_type,omitempty"`
-	ConfidenceScore float64   `json:"confidence_score,omitempty"`
-	CorrelationId   string    `json:"correlation_id,omitempty"`
+	EventId         string    `json:"event_id,omitempty"`
 	AgentId         string    `json:"agent_id,omitempty"`
+	AgentName       string    `json:"agent_name,omitempty"`
+	DecisionType    string    `json:"decision_type,omitempty"`
+	ConfidenceScore float64   `json:"confidence_score,omitempty"`
+	Timestamp       time.Time `json:"timestamp,omitempty"`
+	EntityType      string    `json:"entity_type,omitempty"`
 	EntityId        string    `json:"entity_id,omitempty"`
 	Decision        string    `json:"decision,omitempty"`
 	Reasoning       []string  `json:"reasoning,omitempty"`
-	Timestamp       time.Time `json:"timestamp,omitempty"`
-	EventId         string    `json:"event_id,omitempty"`
-	AgentName       string    `json:"agent_name,omitempty"`
-	DecisionType    string    `json:"decision_type,omitempty"`
+	CorrelationId   string    `json:"correlation_id,omitempty"`
 }

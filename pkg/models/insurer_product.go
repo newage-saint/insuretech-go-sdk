@@ -6,29 +6,29 @@ import (
 
 // InsurerProduct represents a insurer_product
 type InsurerProduct struct {
-	Id                  string      `json:"id"`
-	MinSumAssured       *Money      `json:"min_sum_assured,omitempty"`
+	ProductId           string      `json:"product_id"`
+	Status              interface{} `json:"status"`
 	MinEntryAge         int         `json:"min_entry_age,omitempty"`
-	MinTermYears        int         `json:"min_term_years,omitempty"`
-	MedicalRequired     bool        `json:"medical_required,omitempty"`
-	MedicalThreshold    *Money      `json:"medical_threshold,omitempty"`
-	FreeLookPeriodDays  int         `json:"free_look_period_days,omitempty"`
-	CommissionConfigId  string      `json:"commission_config_id,omitempty"`
+	MaxTermYears        int         `json:"max_term_years,omitempty"`
+	Features            string      `json:"features,omitempty"`
+	EffectiveFrom       time.Time   `json:"effective_from"`
+	MinPremium          *Money      `json:"min_premium,omitempty"`
+	MaxPremium          *Money      `json:"max_premium,omitempty"`
+	Exclusions          string      `json:"exclusions,omitempty"`
+	AuditInfo           interface{} `json:"audit_info"`
+	Id                  string      `json:"id"`
 	InsurerId           string      `json:"insurer_id"`
-	Name                string      `json:"name"`
 	MaxSumAssured       *Money      `json:"max_sum_assured,omitempty"`
 	MaxEntryAge         int         `json:"max_entry_age,omitempty"`
-	MaxTermYears        int         `json:"max_term_years,omitempty"`
-	Exclusions          string      `json:"exclusions,omitempty"`
-	EffectiveFrom       time.Time   `json:"effective_from"`
+	FreeLookPeriodDays  int         `json:"free_look_period_days,omitempty"`
+	CommissionConfigId  string      `json:"commission_config_id,omitempty"`
 	EffectiveTo         time.Time   `json:"effective_to,omitempty"`
-	ProductId           string      `json:"product_id"`
 	Code                string      `json:"code"`
-	MaxPremium          *Money      `json:"max_premium,omitempty"`
+	Name                string      `json:"name"`
+	MinSumAssured       *Money      `json:"min_sum_assured,omitempty"`
 	MaxMaturityAge      int         `json:"max_maturity_age,omitempty"`
+	MinTermYears        int         `json:"min_term_years,omitempty"`
 	PremiumPaymentModes []string    `json:"premium_payment_modes,omitempty"`
-	Status              interface{} `json:"status"`
-	MinPremium          *Money      `json:"min_premium,omitempty"`
-	Features            string      `json:"features,omitempty"`
-	AuditInfo           interface{} `json:"audit_info"`
+	MedicalRequired     bool        `json:"medical_required,omitempty"`
+	MedicalThreshold    *Money      `json:"medical_threshold,omitempty"`
 }

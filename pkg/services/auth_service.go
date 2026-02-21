@@ -11,10 +11,10 @@ type AuthService struct {
 	Client Client
 }
 
-// VerifyOTP Verify OTP
-func (s *AuthService) VerifyOTP(ctx context.Context, req *models.OTPVerificationRequest) (*models.OTPVerificationResponse, error) {
-	path := "/v1/auth/otp:verify"
-	var result models.OTPVerificationResponse
+// Register Register new user
+func (s *AuthService) Register(ctx context.Context, req *models.RegistrationRequest) (*models.RegistrationResponse, error) {
+	path := "/v1/auth/register"
+	var result models.RegistrationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -22,11 +22,22 @@ func (s *AuthService) VerifyOTP(ctx context.Context, req *models.OTPVerification
 	return &result, nil
 }
 
-// GetCurrentSession Get current user's active session
-func (s *AuthService) GetCurrentSession(ctx context.Context) (*models.CurrentSessionRetrievalResponse, error) {
-	path := "/v1/auth/session/current"
-	var result models.CurrentSessionRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+// RefreshToken Refresh access token
+func (s *AuthService) RefreshToken(ctx context.Context, req *models.RefreshTokenRequest) (*models.RefreshTokenResponse, error) {
+	path := "/v1/auth/token:refresh"
+	var result models.RefreshTokenResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// VerifyOTP Verify OTP
+func (s *AuthService) VerifyOTP(ctx context.Context, req *models.OTPVerificationRequest) (*models.OTPVerificationResponse, error) {
+	path := "/v1/auth/otp:verify"
+	var result models.OTPVerificationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -45,10 +56,21 @@ func (s *AuthService) RevokeAllSessions(ctx context.Context, userId string, req 
 	return &result, nil
 }
 
-// Logout Logout
-func (s *AuthService) Logout(ctx context.Context, req *models.LogoutRequest) (*models.LogoutResponse, error) {
-	path := "/v1/auth/logout"
-	var result models.LogoutResponse
+// SendOTP Send OTP for verification
+func (s *AuthService) SendOTP(ctx context.Context, req *models.OTPSendingRequest) (*models.OTPSendingResponse, error) {
+	path := "/v1/auth/otp:send"
+	var result models.OTPSendingResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Login Login with credentials
+func (s *AuthService) Login(ctx context.Context, req *models.LoginRequest) (*models.LoginResponse, error) {
+	path := "/v1/auth/login"
+	var result models.LoginResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -75,32 +97,10 @@ func (s *AuthService) RevokeSession(ctx context.Context, sessionId string) error
 	return s.Client.DoRequest(ctx, "DELETE", path, nil, nil)
 }
 
-// Register Register new user
-func (s *AuthService) Register(ctx context.Context, req *models.RegistrationRequest) (*models.RegistrationResponse, error) {
-	path := "/v1/auth/register"
-	var result models.RegistrationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// ChangePassword Change password
-func (s *AuthService) ChangePassword(ctx context.Context, req *models.ChangePasswordRequest) (*models.ChangePasswordResponse, error) {
-	path := "/v1/auth/password:change"
-	var result models.ChangePasswordResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// SendOTP Send OTP for verification
-func (s *AuthService) SendOTP(ctx context.Context, req *models.OTPSendingRequest) (*models.OTPSendingResponse, error) {
-	path := "/v1/auth/otp:send"
-	var result models.OTPSendingResponse
+// ValidateCSRF Validate CSRF token (server-side sessions only)
+func (s *AuthService) ValidateCSRF(ctx context.Context, req *models.CSRFValidationRequest) (*models.CSRFValidationResponse, error) {
+	path := "/v1/auth/csrf:validate"
+	var result models.CSRFValidationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -119,33 +119,11 @@ func (s *AuthService) ResetPassword(ctx context.Context, req *models.ResetPasswo
 	return &result, nil
 }
 
-// ValidateToken Validate token
-func (s *AuthService) ValidateToken(ctx context.Context, req *models.TokenValidationRequest) (*models.TokenValidationResponse, error) {
-	path := "/v1/auth/token:validate"
-	var result models.TokenValidationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// ValidateCSRF Validate CSRF token (server-side sessions only)
-func (s *AuthService) ValidateCSRF(ctx context.Context, req *models.CSRFValidationRequest) (*models.CSRFValidationResponse, error) {
-	path := "/v1/auth/csrf:validate"
-	var result models.CSRFValidationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// Login Login with credentials
-func (s *AuthService) Login(ctx context.Context, req *models.LoginRequest) (*models.LoginResponse, error) {
-	path := "/v1/auth/login"
-	var result models.LoginResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+// GetCurrentSession Get current user's active session
+func (s *AuthService) GetCurrentSession(ctx context.Context) (*models.CurrentSessionRetrievalResponse, error) {
+	path := "/v1/auth/session/current"
+	var result models.CurrentSessionRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -164,10 +142,32 @@ func (s *AuthService) ListSessions(ctx context.Context, userId string) (*models.
 	return &result, nil
 }
 
-// RefreshToken Refresh access token
-func (s *AuthService) RefreshToken(ctx context.Context, req *models.RefreshTokenRequest) (*models.RefreshTokenResponse, error) {
-	path := "/v1/auth/token:refresh"
-	var result models.RefreshTokenResponse
+// ChangePassword Change password
+func (s *AuthService) ChangePassword(ctx context.Context, req *models.ChangePasswordRequest) (*models.ChangePasswordResponse, error) {
+	path := "/v1/auth/password:change"
+	var result models.ChangePasswordResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// ValidateToken Validate token
+func (s *AuthService) ValidateToken(ctx context.Context, req *models.TokenValidationRequest) (*models.TokenValidationResponse, error) {
+	path := "/v1/auth/token:validate"
+	var result models.TokenValidationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Logout Logout
+func (s *AuthService) Logout(ctx context.Context, req *models.LogoutRequest) (*models.LogoutResponse, error) {
+	path := "/v1/auth/logout"
+	var result models.LogoutResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

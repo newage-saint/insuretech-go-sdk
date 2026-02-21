@@ -11,17 +11,6 @@ type UnderwritingService struct {
 	Client Client
 }
 
-// RequestQuote Request premium quote
-func (s *UnderwritingService) RequestQuote(ctx context.Context, req *models.RequestQuoteRequest) (*models.RequestQuoteResponse, error) {
-	path := "/v1/quotes"
-	var result models.RequestQuoteResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // ListQuotes List quotes for beneficiary
 func (s *UnderwritingService) ListQuotes(ctx context.Context, beneficiaryId string) (*models.QuotesListingResponse, error) {
 	path := "/v1/beneficiaries/{beneficiary_id}/quotes"
@@ -52,6 +41,17 @@ func (s *UnderwritingService) GetHealthDeclaration(ctx context.Context, quoteId 
 	path = strings.ReplaceAll(path, "{quote_id}", quoteId)
 	var result models.HealthDeclarationRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// RequestQuote Request premium quote
+func (s *UnderwritingService) RequestQuote(ctx context.Context, req *models.RequestQuoteRequest) (*models.RequestQuoteResponse, error) {
+	path := "/v1/quotes"
+	var result models.RequestQuoteResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}

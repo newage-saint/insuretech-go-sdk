@@ -11,6 +11,18 @@ type VoiceService struct {
 	Client Client
 }
 
+// GetTranscript Get transcript
+func (s *VoiceService) GetTranscript(ctx context.Context, voiceSessionId string) (*models.TranscriptRetrievalResponse, error) {
+	path := "/v1/voice-sessions/{voice_session_id}/transcript"
+	path = strings.ReplaceAll(path, "{voice_session_id}", voiceSessionId)
+	var result models.TranscriptRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // GetVoiceSession Get voice session
 func (s *VoiceService) GetVoiceSession(ctx context.Context, voiceSessionId string) (*models.VoiceSessionRetrievalResponse, error) {
 	path := "/v1/voice-sessions/{voice_session_id}"
@@ -52,18 +64,6 @@ func (s *VoiceService) StartVoiceSession(ctx context.Context, req *models.VoiceS
 	path := "/v1/voice-sessions"
 	var result models.VoiceSessionStartResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GetTranscript Get transcript
-func (s *VoiceService) GetTranscript(ctx context.Context, voiceSessionId string) (*models.TranscriptRetrievalResponse, error) {
-	path := "/v1/voice-sessions/{voice_session_id}/transcript"
-	path = strings.ReplaceAll(path, "{voice_session_id}", voiceSessionId)
-	var result models.TranscriptRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}

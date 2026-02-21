@@ -2,13 +2,13 @@ package models
 
 // ReportDefinition represents a report_definition
 type ReportDefinition struct {
-	Name         string          `json:"name"`
-	Category     *ReportCategory `json:"category"`
-	Parameters   string          `json:"parameters,omitempty"`
-	FormatConfig string          `json:"format_config,omitempty"`
+	IsActive     bool            `json:"is_active,omitempty"`
 	Id           string          `json:"id"`
+	Category     *ReportCategory `json:"category"`
+	AuditInfo    interface{}     `json:"audit_info"`
+	Name         string          `json:"name"`
 	Description  string          `json:"description,omitempty"`
 	Query        string          `json:"query"`
-	IsActive     bool            `json:"is_active,omitempty"`
-	AuditInfo    interface{}     `json:"audit_info"`
+	Parameters   string          `json:"parameters,omitempty"`
+	FormatConfig string          `json:"format_config,omitempty"`
 }

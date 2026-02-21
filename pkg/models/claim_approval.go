@@ -7,14 +7,14 @@ import (
 // ClaimApproval represents a claim_approval
 type ClaimApproval struct {
 	ApprovalId       string            `json:"approval_id,omitempty"`
-	ClaimId          string            `json:"claim_id,omitempty"`
-	ApproverRole     string            `json:"approver_role,omitempty"`
+	ApprovalLevel    int               `json:"approval_level,omitempty"`
 	Decision         *ApprovalDecision `json:"decision,omitempty"`
 	ApprovedAmount   *Money            `json:"approved_amount,omitempty"`
-	ApprovedAt       time.Time         `json:"approved_at,omitempty"`
-	ApprovedCurrency string            `json:"approved_currency,omitempty"`
-	ApproverId       string            `json:"approver_id,omitempty"`
-	ApprovalLevel    int               `json:"approval_level,omitempty"`
 	Notes            string            `json:"notes,omitempty"`
+	ApprovedAt       time.Time         `json:"approved_at,omitempty"`
+	ClaimId          string            `json:"claim_id,omitempty"`
+	ApproverId       string            `json:"approver_id,omitempty"`
+	ApproverRole     string            `json:"approver_role,omitempty"`
 	CreatedAt        time.Time         `json:"created_at,omitempty"`
+	ApprovedCurrency string            `json:"approved_currency,omitempty"`
 }

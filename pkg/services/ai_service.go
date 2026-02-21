@@ -21,10 +21,10 @@ func (s *AiService) EvaluateClaim(ctx context.Context, req *models.ClaimEvaluati
 	return &result, nil
 }
 
-// DetectFraud Detect fraud
-func (s *AiService) DetectFraud(ctx context.Context, req *models.DetectFraudRequest) (*models.DetectFraudResponse, error) {
-	path := "/v1/ai/fraud:detect"
-	var result models.DetectFraudResponse
+// Chat Chat with AI agent
+func (s *AiService) Chat(ctx context.Context, req *models.ChatRequest) (*models.ChatResponse, error) {
+	path := "/v1/ai/chat"
+	var result models.ChatResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -43,10 +43,10 @@ func (s *AiService) AssessRisk(ctx context.Context, req *models.RiskAssessmentRe
 	return &result, nil
 }
 
-// Chat Chat with AI agent
-func (s *AiService) Chat(ctx context.Context, req *models.ChatRequest) (*models.ChatResponse, error) {
-	path := "/v1/ai/chat"
-	var result models.ChatResponse
+// DetectFraud Detect fraud
+func (s *AiService) DetectFraud(ctx context.Context, req *models.DetectFraudRequest) (*models.DetectFraudResponse, error) {
+	path := "/v1/ai/fraud:detect"
+	var result models.DetectFraudResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

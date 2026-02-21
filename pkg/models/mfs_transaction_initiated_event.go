@@ -6,6 +6,7 @@ import (
 
 // MFSTransactionInitiatedEvent represents a mfs_transaction_initiated_event
 type MFSTransactionInitiatedEvent struct {
+	PaymentId        string    `json:"payment_id,omitempty"`
 	CorrelationId    string    `json:"correlation_id,omitempty"`
 	Timestamp        time.Time `json:"timestamp,omitempty"`
 	EventId          string    `json:"event_id,omitempty"`
@@ -13,5 +14,4 @@ type MFSTransactionInitiatedEvent struct {
 	TransactionId    string    `json:"transaction_id,omitempty"`
 	Provider         string    `json:"provider,omitempty"`
 	Amount           *Money    `json:"amount,omitempty"`
-	PaymentId        string    `json:"payment_id,omitempty"`
 }

@@ -11,58 +11,16 @@ type SupportService struct {
 	Client Client
 }
 
-// GetTicket Get ticket
-func (s *SupportService) GetTicket(ctx context.Context, ticketId string) (*models.TicketRetrievalResponse, error) {
-	path := "/v1/tickets/{ticket_id}"
-	path = strings.ReplaceAll(path, "{ticket_id}", ticketId)
-	var result models.TicketRetrievalResponse
+// GetKnowledgeBaseArticle Get knowledge base article
+func (s *SupportService) GetKnowledgeBaseArticle(ctx context.Context, slug string) (*models.KnowledgeBaseArticleRetrievalResponse, error) {
+	path := "/v1/knowledge-base/{slug}"
+	path = strings.ReplaceAll(path, "{slug}", slug)
+	var result models.KnowledgeBaseArticleRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
 	return &result, nil
-}
-
-// AssignTicket Assign ticket
-func (s *SupportService) AssignTicket(ctx context.Context, ticketId string, req *models.TicketAssignmentRequest) (*models.TicketAssignmentResponse, error) {
-	path := "/v1/tickets/{ticket_id}"
-	path = strings.ReplaceAll(path, "{ticket_id}", ticketId)
-	var result models.TicketAssignmentResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// SearchKnowledgeBase Search knowledge base
-func (s *SupportService) SearchKnowledgeBase(ctx context.Context) (*models.KnowledgeBaseSearchResponse, error) {
-	path := "/v1/knowledge-base/search"
-	var result models.KnowledgeBaseSearchResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// UpdateFAQ Update FAQ
-func (s *SupportService) UpdateFAQ(ctx context.Context, faqId string, req *models.FAQUpdateRequest) (*models.FAQUpdateResponse, error) {
-	path := "/v1/faqs/{faq_id}"
-	path = strings.ReplaceAll(path, "{faq_id}", faqId)
-	var result models.FAQUpdateResponse
-	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// DeleteFAQ Delete FAQ
-func (s *SupportService) DeleteFAQ(ctx context.Context, faqId string) error {
-	path := "/v1/faqs/{faq_id}"
-	path = strings.ReplaceAll(path, "{faq_id}", faqId)
-	return s.Client.DoRequest(ctx, "DELETE", path, nil, nil)
 }
 
 // UpdateKnowledgeBaseArticle Update Knowledge Base Article
@@ -96,21 +54,10 @@ func (s *SupportService) AddTicketMessage(ctx context.Context, ticketId string, 
 	return &result, nil
 }
 
-// ListFAQs List FAQs
-func (s *SupportService) ListFAQs(ctx context.Context) (*models.FAQsListingResponse, error) {
-	path := "/v1/faqs"
-	var result models.FAQsListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// CreateFAQ Create FAQ
-func (s *SupportService) CreateFAQ(ctx context.Context, req *models.FAQCreationRequest) (*models.FAQCreationResponse, error) {
-	path := "/v1/faqs"
-	var result models.FAQCreationResponse
+// CreateTicket Create ticket
+func (s *SupportService) CreateTicket(ctx context.Context, req *models.TicketCreationRequest) (*models.TicketCreationResponse, error) {
+	path := "/v1/tickets"
+	var result models.TicketCreationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -129,10 +76,10 @@ func (s *SupportService) ListTickets(ctx context.Context) (*models.TicketsListin
 	return &result, nil
 }
 
-// CreateTicket Create ticket
-func (s *SupportService) CreateTicket(ctx context.Context, req *models.TicketCreationRequest) (*models.TicketCreationResponse, error) {
-	path := "/v1/tickets"
-	var result models.TicketCreationResponse
+// CreateFAQ Create FAQ
+func (s *SupportService) CreateFAQ(ctx context.Context, req *models.FAQCreationRequest) (*models.FAQCreationResponse, error) {
+	path := "/v1/faqs"
+	var result models.FAQCreationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -140,10 +87,45 @@ func (s *SupportService) CreateTicket(ctx context.Context, req *models.TicketCre
 	return &result, nil
 }
 
-// CreateKnowledgeBaseArticle Create Knowledge Base Article
-func (s *SupportService) CreateKnowledgeBaseArticle(ctx context.Context, req *models.KnowledgeBaseArticleCreationRequest) (*models.KnowledgeBaseArticleCreationResponse, error) {
-	path := "/v1/knowledge-base"
-	var result models.KnowledgeBaseArticleCreationResponse
+// ListFAQs List FAQs
+func (s *SupportService) ListFAQs(ctx context.Context) (*models.FAQsListingResponse, error) {
+	path := "/v1/faqs"
+	var result models.FAQsListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// SearchKnowledgeBase Search knowledge base
+func (s *SupportService) SearchKnowledgeBase(ctx context.Context) (*models.KnowledgeBaseSearchResponse, error) {
+	path := "/v1/knowledge-base/search"
+	var result models.KnowledgeBaseSearchResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetTicket Get ticket
+func (s *SupportService) GetTicket(ctx context.Context, ticketId string) (*models.TicketRetrievalResponse, error) {
+	path := "/v1/tickets/{ticket_id}"
+	path = strings.ReplaceAll(path, "{ticket_id}", ticketId)
+	var result models.TicketRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// AssignTicket Assign ticket
+func (s *SupportService) AssignTicket(ctx context.Context, ticketId string, req *models.TicketAssignmentRequest) (*models.TicketAssignmentResponse, error) {
+	path := "/v1/tickets/{ticket_id}"
+	path = strings.ReplaceAll(path, "{ticket_id}", ticketId)
+	var result models.TicketAssignmentResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -163,12 +145,30 @@ func (s *SupportService) UpdateTicketStatus(ctx context.Context, ticketId string
 	return &result, nil
 }
 
-// GetKnowledgeBaseArticle Get knowledge base article
-func (s *SupportService) GetKnowledgeBaseArticle(ctx context.Context, slug string) (*models.KnowledgeBaseArticleRetrievalResponse, error) {
-	path := "/v1/knowledge-base/{slug}"
-	path = strings.ReplaceAll(path, "{slug}", slug)
-	var result models.KnowledgeBaseArticleRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+// CreateKnowledgeBaseArticle Create Knowledge Base Article
+func (s *SupportService) CreateKnowledgeBaseArticle(ctx context.Context, req *models.KnowledgeBaseArticleCreationRequest) (*models.KnowledgeBaseArticleCreationResponse, error) {
+	path := "/v1/knowledge-base"
+	var result models.KnowledgeBaseArticleCreationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// DeleteFAQ Delete FAQ
+func (s *SupportService) DeleteFAQ(ctx context.Context, faqId string) error {
+	path := "/v1/faqs/{faq_id}"
+	path = strings.ReplaceAll(path, "{faq_id}", faqId)
+	return s.Client.DoRequest(ctx, "DELETE", path, nil, nil)
+}
+
+// UpdateFAQ Update FAQ
+func (s *SupportService) UpdateFAQ(ctx context.Context, faqId string, req *models.FAQUpdateRequest) (*models.FAQUpdateResponse, error) {
+	path := "/v1/faqs/{faq_id}"
+	path = strings.ReplaceAll(path, "{faq_id}", faqId)
+	var result models.FAQUpdateResponse
+	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
 	if err != nil {
 		return nil, err
 	}

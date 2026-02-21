@@ -35,6 +35,18 @@ func (s *InsurerService) UpdateInsurerProduct(ctx context.Context, insurerProduc
 	return &result, nil
 }
 
+// GetInsurer Get insurer details
+func (s *InsurerService) GetInsurer(ctx context.Context, insurerId string) (*models.InsurerRetrievalResponse, error) {
+	path := "/v1/insurers/{insurer_id}"
+	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
+	var result models.InsurerRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // UpdateInsurer Update insurer
 func (s *InsurerService) UpdateInsurer(ctx context.Context, insurerId string, req *models.InsurerUpdateRequest) (*models.InsurerUpdateResponse, error) {
 	path := "/v1/insurers/{insurer_id}"
@@ -47,11 +59,21 @@ func (s *InsurerService) UpdateInsurer(ctx context.Context, insurerId string, re
 	return &result, nil
 }
 
-// GetInsurer Get insurer details
-func (s *InsurerService) GetInsurer(ctx context.Context, insurerId string) (*models.InsurerRetrievalResponse, error) {
-	path := "/v1/insurers/{insurer_id}"
-	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
-	var result models.InsurerRetrievalResponse
+// CreateInsurer Create insurer
+func (s *InsurerService) CreateInsurer(ctx context.Context, req *models.InsurerCreationRequest) (*models.InsurerCreationResponse, error) {
+	path := "/v1/insurers"
+	var result models.InsurerCreationResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// ListInsurers List insurers
+func (s *InsurerService) ListInsurers(ctx context.Context) (*models.InsurersListingResponse, error) {
+	path := "/v1/insurers"
+	var result models.InsurersListingResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
@@ -89,28 +111,6 @@ func (s *InsurerService) UpdateInsurerConfig(ctx context.Context, insurerId stri
 	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
 	var result models.InsurerConfigUpdateResponse
 	err := s.Client.DoRequest(ctx, "PUT", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// CreateInsurer Create insurer
-func (s *InsurerService) CreateInsurer(ctx context.Context, req *models.InsurerCreationRequest) (*models.InsurerCreationResponse, error) {
-	path := "/v1/insurers"
-	var result models.InsurerCreationResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// ListInsurers List insurers
-func (s *InsurerService) ListInsurers(ctx context.Context) (*models.InsurersListingResponse, error) {
-	path := "/v1/insurers"
-	var result models.InsurersListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
