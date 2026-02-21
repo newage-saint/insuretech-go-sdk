@@ -6,6 +6,7 @@ import (
 
 // PolicyCancelledEvent represents a policy_cancelled_event
 type PolicyCancelledEvent struct {
+	PolicyNumber  string    `json:"policy_number,omitempty"`
 	CustomerId    string    `json:"customer_id,omitempty"`
 	Reason        string    `json:"reason,omitempty"`
 	RefundAmount  *Money    `json:"refund_amount,omitempty"`
@@ -13,5 +14,4 @@ type PolicyCancelledEvent struct {
 	CorrelationId string    `json:"correlation_id,omitempty"`
 	EventId       string    `json:"event_id,omitempty"`
 	PolicyId      string    `json:"policy_id,omitempty"`
-	PolicyNumber  string    `json:"policy_number,omitempty"`
 }

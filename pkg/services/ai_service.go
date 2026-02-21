@@ -21,10 +21,10 @@ func (s *AiService) EvaluateClaim(ctx context.Context, req *models.ClaimEvaluati
 	return &result, nil
 }
 
-// AnalyzeDocument Analyze document
-func (s *AiService) AnalyzeDocument(ctx context.Context, req *models.DocumentAnalysisRequest) (*models.DocumentAnalysisResponse, error) {
-	path := "/v1/ai/documents:analyze"
-	var result models.DocumentAnalysisResponse
+// DetectFraud Detect fraud
+func (s *AiService) DetectFraud(ctx context.Context, req *models.DetectFraudRequest) (*models.DetectFraudResponse, error) {
+	path := "/v1/ai/fraud:detect"
+	var result models.DetectFraudResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -32,10 +32,10 @@ func (s *AiService) AnalyzeDocument(ctx context.Context, req *models.DocumentAna
 	return &result, nil
 }
 
-// DetectFraud Detect fraud
-func (s *AiService) DetectFraud(ctx context.Context, req *models.DetectFraudRequest) (*models.DetectFraudResponse, error) {
-	path := "/v1/ai/fraud:detect"
-	var result models.DetectFraudResponse
+// AssessRisk Assess risk
+func (s *AiService) AssessRisk(ctx context.Context, req *models.RiskAssessmentRequest) (*models.RiskAssessmentResponse, error) {
+	path := "/v1/ai/risk:assess"
+	var result models.RiskAssessmentResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -54,10 +54,10 @@ func (s *AiService) Chat(ctx context.Context, req *models.ChatRequest) (*models.
 	return &result, nil
 }
 
-// AssessRisk Assess risk
-func (s *AiService) AssessRisk(ctx context.Context, req *models.RiskAssessmentRequest) (*models.RiskAssessmentResponse, error) {
-	path := "/v1/ai/risk:assess"
-	var result models.RiskAssessmentResponse
+// AnalyzeDocument Analyze document
+func (s *AiService) AnalyzeDocument(ctx context.Context, req *models.DocumentAnalysisRequest) (*models.DocumentAnalysisResponse, error) {
+	path := "/v1/ai/documents:analyze"
+	var result models.DocumentAnalysisResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

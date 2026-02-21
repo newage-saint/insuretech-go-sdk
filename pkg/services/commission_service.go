@@ -11,10 +11,11 @@ type CommissionService struct {
 	Client Client
 }
 
-// ListCommissions List commissions for recipient
-func (s *CommissionService) ListCommissions(ctx context.Context) (*models.CommissionsListingResponse, error) {
-	path := "/v1/commissions"
-	var result models.CommissionsListingResponse
+// GetCommission Get commission details
+func (s *CommissionService) GetCommission(ctx context.Context, commissionId string) (*models.CommissionRetrievalResponse, error) {
+	path := "/v1/commissions/{commission_id}"
+	path = strings.ReplaceAll(path, "{commission_id}", commissionId)
+	var result models.CommissionRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
@@ -33,23 +34,10 @@ func (s *CommissionService) CalculateCommission(ctx context.Context, req *models
 	return &result, nil
 }
 
-// GetCommission Get commission details
-func (s *CommissionService) GetCommission(ctx context.Context, commissionId string) (*models.CommissionRetrievalResponse, error) {
-	path := "/v1/commissions/{commission_id}"
-	path = strings.ReplaceAll(path, "{commission_id}", commissionId)
-	var result models.CommissionRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GetCommissionStatement Get commission statement
-func (s *CommissionService) GetCommissionStatement(ctx context.Context, recipientId string) (*models.CommissionStatementRetrievalResponse, error) {
-	path := "/v1/recipients/{recipient_id}/commission-statement"
-	path = strings.ReplaceAll(path, "{recipient_id}", recipientId)
-	var result models.CommissionStatementRetrievalResponse
+// ListCommissions List commissions for recipient
+func (s *CommissionService) ListCommissions(ctx context.Context) (*models.CommissionsListingResponse, error) {
+	path := "/v1/commissions"
+	var result models.CommissionsListingResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
@@ -63,6 +51,18 @@ func (s *CommissionService) ProcessPayout(ctx context.Context, payoutId string, 
 	path = strings.ReplaceAll(path, "{payout_id}", payoutId)
 	var result models.PayoutProcessingResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetCommissionStatement Get commission statement
+func (s *CommissionService) GetCommissionStatement(ctx context.Context, recipientId string) (*models.CommissionStatementRetrievalResponse, error) {
+	path := "/v1/recipients/{recipient_id}/commission-statement"
+	path = strings.ReplaceAll(path, "{recipient_id}", recipientId)
+	var result models.CommissionStatementRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}

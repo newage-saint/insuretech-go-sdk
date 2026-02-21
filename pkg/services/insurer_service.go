@@ -11,12 +11,48 @@ type InsurerService struct {
 	Client Client
 }
 
-// UpdateInsurerConfig Update insurer config
-func (s *InsurerService) UpdateInsurerConfig(ctx context.Context, insurerId string, req *models.InsurerConfigUpdateRequest) (*models.InsurerConfigUpdateResponse, error) {
-	path := "/v1/insurers/{insurer_id}/config"
+// GetInsurerProduct Get insurer product
+func (s *InsurerService) GetInsurerProduct(ctx context.Context, insurerProductId string) (*models.InsurerProductRetrievalResponse, error) {
+	path := "/v1/insurer-products/{insurer_product_id}"
+	path = strings.ReplaceAll(path, "{insurer_product_id}", insurerProductId)
+	var result models.InsurerProductRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// UpdateInsurerProduct Update insurer product
+func (s *InsurerService) UpdateInsurerProduct(ctx context.Context, insurerProductId string, req *models.InsurerProductUpdateRequest) (*models.InsurerProductUpdateResponse, error) {
+	path := "/v1/insurer-products/{insurer_product_id}"
+	path = strings.ReplaceAll(path, "{insurer_product_id}", insurerProductId)
+	var result models.InsurerProductUpdateResponse
+	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// UpdateInsurer Update insurer
+func (s *InsurerService) UpdateInsurer(ctx context.Context, insurerId string, req *models.InsurerUpdateRequest) (*models.InsurerUpdateResponse, error) {
+	path := "/v1/insurers/{insurer_id}"
 	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
-	var result models.InsurerConfigUpdateResponse
-	err := s.Client.DoRequest(ctx, "PUT", path, req, &result)
+	var result models.InsurerUpdateResponse
+	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetInsurer Get insurer details
+func (s *InsurerService) GetInsurer(ctx context.Context, insurerId string) (*models.InsurerRetrievalResponse, error) {
+	path := "/v1/insurers/{insurer_id}"
+	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
+	var result models.InsurerRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -47,48 +83,12 @@ func (s *InsurerService) ListInsurerProducts(ctx context.Context, insurerId stri
 	return &result, nil
 }
 
-// GetInsurer Get insurer details
-func (s *InsurerService) GetInsurer(ctx context.Context, insurerId string) (*models.InsurerRetrievalResponse, error) {
-	path := "/v1/insurers/{insurer_id}"
+// UpdateInsurerConfig Update insurer config
+func (s *InsurerService) UpdateInsurerConfig(ctx context.Context, insurerId string, req *models.InsurerConfigUpdateRequest) (*models.InsurerConfigUpdateResponse, error) {
+	path := "/v1/insurers/{insurer_id}/config"
 	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
-	var result models.InsurerRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// UpdateInsurer Update insurer
-func (s *InsurerService) UpdateInsurer(ctx context.Context, insurerId string, req *models.InsurerUpdateRequest) (*models.InsurerUpdateResponse, error) {
-	path := "/v1/insurers/{insurer_id}"
-	path = strings.ReplaceAll(path, "{insurer_id}", insurerId)
-	var result models.InsurerUpdateResponse
-	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GetInsurerProduct Get insurer product
-func (s *InsurerService) GetInsurerProduct(ctx context.Context, insurerProductId string) (*models.InsurerProductRetrievalResponse, error) {
-	path := "/v1/insurer-products/{insurer_product_id}"
-	path = strings.ReplaceAll(path, "{insurer_product_id}", insurerProductId)
-	var result models.InsurerProductRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// UpdateInsurerProduct Update insurer product
-func (s *InsurerService) UpdateInsurerProduct(ctx context.Context, insurerProductId string, req *models.InsurerProductUpdateRequest) (*models.InsurerProductUpdateResponse, error) {
-	path := "/v1/insurer-products/{insurer_product_id}"
-	path = strings.ReplaceAll(path, "{insurer_product_id}", insurerProductId)
-	var result models.InsurerProductUpdateResponse
-	err := s.Client.DoRequest(ctx, "PATCH", path, req, &result)
+	var result models.InsurerConfigUpdateResponse
+	err := s.Client.DoRequest(ctx, "PUT", path, req, &result)
 	if err != nil {
 		return nil, err
 	}

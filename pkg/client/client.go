@@ -21,36 +21,36 @@ type Client struct {
 
 	// Service clients - auto-generated from OpenAPI spec
 	// These will be populated during generation
-	Iot          *services.IotService
-	Fraud        *services.FraudService
-	Renewal      *services.RenewalService
-	Refund       *services.RefundService
-	Voice        *services.VoiceService
-	Task         *services.TaskService
-	Document     *services.DocumentService
-	Ai           *services.AiService
-	Auth         *services.AuthService
-	Policy       *services.PolicyService
-	Report       *services.ReportService
-	Support      *services.SupportService
-	Partner      *services.PartnerService
-	Workflow     *services.WorkflowService
-	Audit        *services.AuditService
-	Tenant       *services.TenantService
-	Payment      *services.PaymentService
 	Authz        *services.AuthzService
-	Endorsement  *services.EndorsementService
-	Insurer      *services.InsurerService
-	Commission   *services.CommissionService
+	Payment      *services.PaymentService
+	Support      *services.SupportService
 	Mfs          *services.MfsService
-	Notification *services.NotificationService
-	Analytics    *services.AnalyticsService
-	Apikey       *services.ApikeyService
-	Claim        *services.ClaimService
-	Kyc          *services.KycService
-	Underwriting *services.UnderwritingService
+	Fraud        *services.FraudService
 	Product      *services.ProductService
+	Underwriting *services.UnderwritingService
+	Document     *services.DocumentService
+	Insurer      *services.InsurerService
+	Claim        *services.ClaimService
+	Renewal      *services.RenewalService
+	Report       *services.ReportService
+	Endorsement  *services.EndorsementService
+	Refund       *services.RefundService
+	Commission   *services.CommissionService
+	Voice        *services.VoiceService
+	Audit        *services.AuditService
+	Auth         *services.AuthService
+	Tenant       *services.TenantService
+	Task         *services.TaskService
+	Analytics    *services.AnalyticsService
+	Notification *services.NotificationService
 	Beneficiary  *services.BeneficiaryService
+	Workflow     *services.WorkflowService
+	Ai           *services.AiService
+	Iot          *services.IotService
+	Policy       *services.PolicyService
+	Partner      *services.PartnerService
+	Apikey       *services.ApikeyService
+	Kyc          *services.KycService
 }
 
 // ClientOption is a function that configures the Client
@@ -71,36 +71,36 @@ func NewClient(opts ...ClientOption) *Client {
 	}
 
 	// Initialize service clients - auto-generated
-	c.Iot = &services.IotService{Client: c}
-	c.Fraud = &services.FraudService{Client: c}
-	c.Renewal = &services.RenewalService{Client: c}
-	c.Refund = &services.RefundService{Client: c}
-	c.Voice = &services.VoiceService{Client: c}
-	c.Task = &services.TaskService{Client: c}
-	c.Document = &services.DocumentService{Client: c}
-	c.Ai = &services.AiService{Client: c}
-	c.Auth = &services.AuthService{Client: c}
-	c.Policy = &services.PolicyService{Client: c}
-	c.Report = &services.ReportService{Client: c}
-	c.Support = &services.SupportService{Client: c}
-	c.Partner = &services.PartnerService{Client: c}
-	c.Workflow = &services.WorkflowService{Client: c}
-	c.Audit = &services.AuditService{Client: c}
-	c.Tenant = &services.TenantService{Client: c}
-	c.Payment = &services.PaymentService{Client: c}
 	c.Authz = &services.AuthzService{Client: c}
-	c.Endorsement = &services.EndorsementService{Client: c}
-	c.Insurer = &services.InsurerService{Client: c}
-	c.Commission = &services.CommissionService{Client: c}
+	c.Payment = &services.PaymentService{Client: c}
+	c.Support = &services.SupportService{Client: c}
 	c.Mfs = &services.MfsService{Client: c}
-	c.Notification = &services.NotificationService{Client: c}
-	c.Analytics = &services.AnalyticsService{Client: c}
-	c.Apikey = &services.ApikeyService{Client: c}
-	c.Claim = &services.ClaimService{Client: c}
-	c.Kyc = &services.KycService{Client: c}
-	c.Underwriting = &services.UnderwritingService{Client: c}
+	c.Fraud = &services.FraudService{Client: c}
 	c.Product = &services.ProductService{Client: c}
+	c.Underwriting = &services.UnderwritingService{Client: c}
+	c.Document = &services.DocumentService{Client: c}
+	c.Insurer = &services.InsurerService{Client: c}
+	c.Claim = &services.ClaimService{Client: c}
+	c.Renewal = &services.RenewalService{Client: c}
+	c.Report = &services.ReportService{Client: c}
+	c.Endorsement = &services.EndorsementService{Client: c}
+	c.Refund = &services.RefundService{Client: c}
+	c.Commission = &services.CommissionService{Client: c}
+	c.Voice = &services.VoiceService{Client: c}
+	c.Audit = &services.AuditService{Client: c}
+	c.Auth = &services.AuthService{Client: c}
+	c.Tenant = &services.TenantService{Client: c}
+	c.Task = &services.TaskService{Client: c}
+	c.Analytics = &services.AnalyticsService{Client: c}
+	c.Notification = &services.NotificationService{Client: c}
 	c.Beneficiary = &services.BeneficiaryService{Client: c}
+	c.Workflow = &services.WorkflowService{Client: c}
+	c.Ai = &services.AiService{Client: c}
+	c.Iot = &services.IotService{Client: c}
+	c.Policy = &services.PolicyService{Client: c}
+	c.Partner = &services.PartnerService{Client: c}
+	c.Apikey = &services.ApikeyService{Client: c}
+	c.Kyc = &services.KycService{Client: c}
 
 	return c
 }

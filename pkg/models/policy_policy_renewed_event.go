@@ -6,7 +6,6 @@ import (
 
 // PolicyPolicyRenewedEvent represents a policy_policy_renewed_event
 type PolicyPolicyRenewedEvent struct {
-	PremiumAmount   *Money    `json:"premium_amount,omitempty"`
 	Timestamp       time.Time `json:"timestamp,omitempty"`
 	CorrelationId   string    `json:"correlation_id,omitempty"`
 	EventId         string    `json:"event_id,omitempty"`
@@ -14,4 +13,5 @@ type PolicyPolicyRenewedEvent struct {
 	NewPolicyId     string    `json:"new_policy_id,omitempty"`
 	NewPolicyNumber string    `json:"new_policy_number,omitempty"`
 	CustomerId      string    `json:"customer_id,omitempty"`
+	PremiumAmount   *Money    `json:"premium_amount,omitempty"`
 }

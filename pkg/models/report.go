@@ -6,15 +6,15 @@ import (
 
 // Report represents a report
 type Report struct {
-	PeriodStart time.Time   `json:"period_start"`
+	UpdatedAt   time.Time   `json:"updated_at"`
 	PeriodEnd   time.Time   `json:"period_end"`
-	ReportData  string      `json:"report_data"`
-	ReportUrl   string      `json:"report_url,omitempty"`
 	Status      interface{} `json:"status"`
 	GeneratedBy string      `json:"generated_by,omitempty"`
-	ReportName  string      `json:"report_name"`
-	CreatedAt   time.Time   `json:"created_at"`
-	UpdatedAt   time.Time   `json:"updated_at"`
 	ReportId    string      `json:"report_id"`
+	ReportName  string      `json:"report_name"`
 	Type        *ReportType `json:"type"`
+	PeriodStart time.Time   `json:"period_start"`
+	ReportData  string      `json:"report_data"`
+	ReportUrl   string      `json:"report_url,omitempty"`
+	CreatedAt   time.Time   `json:"created_at"`
 }

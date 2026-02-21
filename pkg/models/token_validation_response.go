@@ -6,7 +6,6 @@ import (
 
 // TokenValidationResponse represents a token_validation_response
 type TokenValidationResponse struct {
-	SessionType string    `json:"session_type,omitempty"`
 	Roles       []string  `json:"roles,omitempty"`
 	Permissions []string  `json:"permissions,omitempty"`
 	ExpiresAt   time.Time `json:"expires_at,omitempty"`
@@ -14,4 +13,5 @@ type TokenValidationResponse struct {
 	Valid       bool      `json:"valid,omitempty"`
 	UserId      string    `json:"user_id,omitempty"`
 	SessionId   string    `json:"session_id,omitempty"`
+	SessionType string    `json:"session_type,omitempty"`
 }

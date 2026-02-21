@@ -7,13 +7,13 @@ import (
 // NotificationTemplate represents a notification_template
 type NotificationTemplate struct {
 	TemplateId      string               `json:"template_id"`
-	Type            *NotificationType    `json:"type"`
-	SubjectTemplate string               `json:"subject_template,omitempty"`
-	UpdatedAt       time.Time            `json:"updated_at"`
-	IsActive        bool                 `json:"is_active"`
 	TemplateName    string               `json:"template_name"`
+	Type            *NotificationType    `json:"type"`
 	Channel         *NotificationChannel `json:"channel"`
-	BodyTemplate    string               `json:"body_template"`
 	Language        string               `json:"language"`
 	CreatedAt       time.Time            `json:"created_at"`
+	IsActive        bool                 `json:"is_active"`
+	SubjectTemplate string               `json:"subject_template,omitempty"`
+	BodyTemplate    string               `json:"body_template"`
+	UpdatedAt       time.Time            `json:"updated_at"`
 }

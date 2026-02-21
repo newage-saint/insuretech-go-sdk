@@ -7,12 +7,12 @@ import (
 // Telemetry represents a telemetry
 type Telemetry struct {
 	TelemetryId string                 `json:"telemetry_id"`
-	DeviceId    string                 `json:"device_id"`
-	Metrics     map[string]interface{} `json:"metrics,omitempty"`
-	Location    *Location              `json:"location,omitempty"`
-	Timestamp   time.Time              `json:"timestamp"`
 	Type        *TelemetryType         `json:"type"`
+	Metrics     map[string]interface{} `json:"metrics,omitempty"`
 	Latitude    float64                `json:"latitude,omitempty"`
 	Longitude   float64                `json:"longitude,omitempty"`
+	Location    *Location              `json:"location,omitempty"`
+	DeviceId    string                 `json:"device_id"`
+	Timestamp   time.Time              `json:"timestamp"`
 	RawData     string                 `json:"raw_data,omitempty"`
 }

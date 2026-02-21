@@ -11,10 +11,11 @@ type BeneficiaryService struct {
 	Client Client
 }
 
-// CreateIndividualBeneficiary Create individual beneficiary
-func (s *BeneficiaryService) CreateIndividualBeneficiary(ctx context.Context, req *models.IndividualBeneficiaryCreationRequest) (*models.IndividualBeneficiaryCreationResponse, error) {
-	path := "/v1/beneficiaries/individual"
-	var result models.IndividualBeneficiaryCreationResponse
+// CompleteKYC Complete KYC
+func (s *BeneficiaryService) CompleteKYC(ctx context.Context, beneficiaryId string, req *models.KYCCompletionRequest) (*models.KYCCompletionResponse, error) {
+	path := "/v1/beneficiaries/{beneficiary_id}/kyc"
+	path = strings.ReplaceAll(path, "{beneficiary_id}", beneficiaryId)
+	var result models.KYCCompletionResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
@@ -22,11 +23,10 @@ func (s *BeneficiaryService) CreateIndividualBeneficiary(ctx context.Context, re
 	return &result, nil
 }
 
-// CompleteKYC Complete KYC
-func (s *BeneficiaryService) CompleteKYC(ctx context.Context, beneficiaryId string, req *models.KYCCompletionRequest) (*models.KYCCompletionResponse, error) {
-	path := "/v1/beneficiaries/{beneficiary_id}/kyc"
-	path = strings.ReplaceAll(path, "{beneficiary_id}", beneficiaryId)
-	var result models.KYCCompletionResponse
+// CreateIndividualBeneficiary Create individual beneficiary
+func (s *BeneficiaryService) CreateIndividualBeneficiary(ctx context.Context, req *models.IndividualBeneficiaryCreationRequest) (*models.IndividualBeneficiaryCreationResponse, error) {
+	path := "/v1/beneficiaries/individual"
+	var result models.IndividualBeneficiaryCreationResponse
 	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err

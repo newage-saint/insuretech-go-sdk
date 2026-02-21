@@ -6,6 +6,7 @@ import (
 
 // FraudCaseCreatedEvent represents a fraud_case_created_event
 type FraudCaseCreatedEvent struct {
+	CaseNumber     string    `json:"case_number,omitempty"`
 	FraudAlertId   string    `json:"fraud_alert_id,omitempty"`
 	Priority       string    `json:"priority,omitempty"`
 	InvestigatorId string    `json:"investigator_id,omitempty"`
@@ -13,5 +14,4 @@ type FraudCaseCreatedEvent struct {
 	Timestamp      time.Time `json:"timestamp,omitempty"`
 	EventId        string    `json:"event_id,omitempty"`
 	FraudCaseId    string    `json:"fraud_case_id,omitempty"`
-	CaseNumber     string    `json:"case_number,omitempty"`
 }

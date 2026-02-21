@@ -11,25 +11,12 @@ type WorkflowService struct {
 	Client Client
 }
 
-// GetWorkflowInstance Get workflow instance
-func (s *WorkflowService) GetWorkflowInstance(ctx context.Context, workflowInstanceId string) (*models.WorkflowInstanceRetrievalResponse, error) {
-	path := "/v1/workflow-instances/{workflow_instance_id}"
-	path = strings.ReplaceAll(path, "{workflow_instance_id}", workflowInstanceId)
-	var result models.WorkflowInstanceRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GetWorkflowHistory Get workflow history for entity
-func (s *WorkflowService) GetWorkflowHistory(ctx context.Context, entityType string, entityId string) (*models.WorkflowHistoryRetrievalResponse, error) {
-	path := "/v1/entities/{entity_type}/{entity_id}/workflow-history"
-	path = strings.ReplaceAll(path, "{entity_type}", entityType)
-	path = strings.ReplaceAll(path, "{entity_id}", entityId)
-	var result models.WorkflowHistoryRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+// CompleteTask Complete task
+func (s *WorkflowService) CompleteTask(ctx context.Context, taskId string, req *models.WorkflowTaskCompletionRequest) (*models.WorkflowTaskCompletionResponse, error) {
+	path := "/v1/workflow-tasks/{task_id}"
+	path = strings.ReplaceAll(path, "{task_id}", taskId)
+	var result models.WorkflowTaskCompletionResponse
+	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -59,12 +46,12 @@ func (s *WorkflowService) StartWorkflow(ctx context.Context, req *models.Workflo
 	return &result, nil
 }
 
-// CompleteTask Complete task
-func (s *WorkflowService) CompleteTask(ctx context.Context, taskId string, req *models.WorkflowTaskCompletionRequest) (*models.WorkflowTaskCompletionResponse, error) {
-	path := "/v1/workflow-tasks/{task_id}"
-	path = strings.ReplaceAll(path, "{task_id}", taskId)
-	var result models.WorkflowTaskCompletionResponse
-	err := s.Client.DoRequest(ctx, "POST", path, req, &result)
+// GetWorkflowInstance Get workflow instance
+func (s *WorkflowService) GetWorkflowInstance(ctx context.Context, workflowInstanceId string) (*models.WorkflowInstanceRetrievalResponse, error) {
+	path := "/v1/workflow-instances/{workflow_instance_id}"
+	path = strings.ReplaceAll(path, "{workflow_instance_id}", workflowInstanceId)
+	var result models.WorkflowInstanceRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -75,6 +62,19 @@ func (s *WorkflowService) CompleteTask(ctx context.Context, taskId string, req *
 func (s *WorkflowService) GetMyTasks(ctx context.Context) (*models.MyTasksRetrievalResponse, error) {
 	path := "/v1/workflow-tasks/my-tasks"
 	var result models.MyTasksRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetWorkflowHistory Get workflow history for entity
+func (s *WorkflowService) GetWorkflowHistory(ctx context.Context, entityType string, entityId string) (*models.WorkflowHistoryRetrievalResponse, error) {
+	path := "/v1/entities/{entity_type}/{entity_id}/workflow-history"
+	path = strings.ReplaceAll(path, "{entity_type}", entityType)
+	path = strings.ReplaceAll(path, "{entity_id}", entityId)
+	var result models.WorkflowHistoryRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err

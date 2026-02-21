@@ -6,17 +6,17 @@ import (
 
 // IoTDevice represents a iot_device
 type IoTDevice struct {
-	Status       interface{}            `json:"status"`
 	LastSeenAt   time.Time              `json:"last_seen_at,omitempty"`
-	Metadata     map[string]interface{} `json:"metadata,omitempty"`
-	Model        string                 `json:"model"`
-	PolicyId     string                 `json:"policy_id,omitempty"`
-	RegisteredAt time.Time              `json:"registered_at"`
-	CreatedAt    time.Time              `json:"created_at"`
 	UpdatedAt    time.Time              `json:"updated_at"`
-	DeviceId     string                 `json:"device_id"`
 	DeviceSerial string                 `json:"device_serial"`
+	PolicyId     string                 `json:"policy_id,omitempty"`
+	OwnerId      string                 `json:"owner_id"`
+	Status       interface{}            `json:"status"`
+	RegisteredAt time.Time              `json:"registered_at"`
+	Metadata     map[string]interface{} `json:"metadata,omitempty"`
+	CreatedAt    time.Time              `json:"created_at"`
+	DeviceId     string                 `json:"device_id"`
 	Type         *IotDeviceType         `json:"type"`
 	Manufacturer string                 `json:"manufacturer"`
-	OwnerId      string                 `json:"owner_id"`
+	Model        string                 `json:"model"`
 }

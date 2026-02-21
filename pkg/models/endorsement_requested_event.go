@@ -6,6 +6,7 @@ import (
 
 // EndorsementRequestedEvent represents a endorsement_requested_event
 type EndorsementRequestedEvent struct {
+	EndorsementId     string    `json:"endorsement_id,omitempty"`
 	EndorsementNumber string    `json:"endorsement_number,omitempty"`
 	PolicyId          string    `json:"policy_id,omitempty"`
 	Type              string    `json:"type,omitempty"`
@@ -13,5 +14,4 @@ type EndorsementRequestedEvent struct {
 	CorrelationId     string    `json:"correlation_id,omitempty"`
 	Timestamp         time.Time `json:"timestamp,omitempty"`
 	EventId           string    `json:"event_id,omitempty"`
-	EndorsementId     string    `json:"endorsement_id,omitempty"`
 }

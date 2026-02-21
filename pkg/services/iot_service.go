@@ -22,18 +22,6 @@ func (s *IotService) RegisterDevice(ctx context.Context, req *models.DeviceRegis
 	return &result, nil
 }
 
-// GetDeviceStatus Get device status
-func (s *IotService) GetDeviceStatus(ctx context.Context, deviceId string) (*models.DeviceStatusRetrievalResponse, error) {
-	path := "/v1/iot/devices/{device_id}"
-	path = strings.ReplaceAll(path, "{device_id}", deviceId)
-	var result models.DeviceStatusRetrievalResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
 // DeactivateDevice Deactivate device
 func (s *IotService) DeactivateDevice(ctx context.Context, deviceId string, req *models.DeviceDeactivationRequest) (*models.DeviceDeactivationResponse, error) {
 	path := "/v1/iot/devices/{device_id}:deactivate"
@@ -51,6 +39,18 @@ func (s *IotService) GetRiskAssessment(ctx context.Context, deviceId string) (*m
 	path := "/v1/iot/devices/{device_id}/risk"
 	path = strings.ReplaceAll(path, "{device_id}", deviceId)
 	var result models.RiskAssessmentRetrievalResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// GetDeviceStatus Get device status
+func (s *IotService) GetDeviceStatus(ctx context.Context, deviceId string) (*models.DeviceStatusRetrievalResponse, error) {
+	path := "/v1/iot/devices/{device_id}"
+	path = strings.ReplaceAll(path, "{device_id}", deviceId)
+	var result models.DeviceStatusRetrievalResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err

@@ -6,15 +6,15 @@ import (
 
 // MFSWebhook represents a mfs_webhook
 type MFSWebhook struct {
-	MfsTransactionId string      `json:"mfs_transaction_id,omitempty"`
-	ErrorMessage     string      `json:"error_message,omitempty"`
-	ProcessedAt      time.Time   `json:"processed_at,omitempty"`
 	Provider         string      `json:"provider"`
+	EventType        string      `json:"event_type"`
 	Headers          string      `json:"headers,omitempty"`
+	Status           interface{} `json:"status"`
 	SignatureValid   bool        `json:"signature_valid,omitempty"`
+	MfsTransactionId string      `json:"mfs_transaction_id,omitempty"`
+	ProcessedAt      time.Time   `json:"processed_at,omitempty"`
 	AuditInfo        interface{} `json:"audit_info"`
 	Id               string      `json:"id"`
-	EventType        string      `json:"event_type"`
 	Payload          string      `json:"payload"`
-	Status           interface{} `json:"status"`
+	ErrorMessage     string      `json:"error_message,omitempty"`
 }

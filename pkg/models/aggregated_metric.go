@@ -6,7 +6,6 @@ import (
 
 // AggregatedMetric represents a aggregated_metric
 type AggregatedMetric struct {
-	Aggregation        *MetricAggregation     `json:"aggregation"`
 	Value              float64                `json:"value"`
 	Timestamp          time.Time              `json:"timestamp"`
 	Dimensions         map[string]interface{} `json:"dimensions,omitempty"`
@@ -14,4 +13,5 @@ type AggregatedMetric struct {
 	AggregatedMetricId string                 `json:"aggregated_metric_id"`
 	MetricId           string                 `json:"metric_id"`
 	MetricName         string                 `json:"metric_name"`
+	Aggregation        *MetricAggregation     `json:"aggregation"`
 }
