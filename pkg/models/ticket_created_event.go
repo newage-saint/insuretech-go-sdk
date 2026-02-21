@@ -9,10 +9,10 @@ type TicketCreatedEvent struct {
 	TicketNumber  string    `json:"ticket_number,omitempty"`
 	BeneficiaryId string    `json:"beneficiary_id,omitempty"`
 	Type          string    `json:"type,omitempty"`
+	CorrelationId string    `json:"correlation_id,omitempty"`
+	EventId       string    `json:"event_id,omitempty"`
+	TicketId      string    `json:"ticket_id,omitempty"`
 	Category      string    `json:"category,omitempty"`
 	Priority      string    `json:"priority,omitempty"`
-	CorrelationId string    `json:"correlation_id,omitempty"`
-	TicketId      string    `json:"ticket_id,omitempty"`
 	Timestamp     time.Time `json:"timestamp,omitempty"`
-	EventId       string    `json:"event_id,omitempty"`
 }

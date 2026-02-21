@@ -6,6 +6,10 @@ type LoginResponse struct {
 	AccessToken           string `json:"access_token,omitempty"`
 	RefreshToken          string `json:"refresh_token,omitempty"`
 	AccessTokenExpiresIn  int    `json:"access_token_expires_in,omitempty"`
+	SessionToken          string `json:"session_token,omitempty"`
+	CsrfToken             string `json:"csrf_token,omitempty"`
+	SessionType           string `json:"session_type,omitempty"`
+	SessionId             string `json:"session_id,omitempty"`
 	RefreshTokenExpiresIn int    `json:"refresh_token_expires_in,omitempty"`
 	User                  *User  `json:"user,omitempty"`
 	Error                 *Error `json:"error,omitempty"`

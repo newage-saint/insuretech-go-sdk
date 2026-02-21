@@ -6,20 +6,20 @@ import (
 
 // Notification represents a notification
 type Notification struct {
-	RetryCount     int                    `json:"retry_count"`
-	NotificationId string                 `json:"notification_id"`
-	RecipientId    string                 `json:"recipient_id"`
-	Channel        *NotificationChannel   `json:"channel"`
-	TemplateData   map[string]interface{} `json:"template_data,omitempty"`
+	SentAt         time.Time              `json:"sent_at,omitempty"`
 	DeliveredAt    time.Time              `json:"delivered_at,omitempty"`
 	ReadAt         time.Time              `json:"read_at,omitempty"`
+	Channel        *NotificationChannel   `json:"channel"`
 	Message        string                 `json:"message"`
-	SentAt         time.Time              `json:"sent_at,omitempty"`
+	TemplateData   map[string]interface{} `json:"template_data,omitempty"`
+	RetryCount     int                    `json:"retry_count"`
 	ErrorMessage   string                 `json:"error_message,omitempty"`
-	Priority       interface{}            `json:"priority"`
+	CreatedAt      time.Time              `json:"created_at"`
+	NotificationId string                 `json:"notification_id"`
+	Subject        string                 `json:"subject,omitempty"`
+	RecipientId    string                 `json:"recipient_id"`
 	Status         interface{}            `json:"status"`
 	Type           *NotificationType      `json:"type"`
-	Subject        string                 `json:"subject,omitempty"`
+	Priority       interface{}            `json:"priority"`
 	ScheduledAt    time.Time              `json:"scheduled_at,omitempty"`
-	CreatedAt      time.Time              `json:"created_at"`
 }

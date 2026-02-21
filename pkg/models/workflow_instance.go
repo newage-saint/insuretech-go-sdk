@@ -6,15 +6,15 @@ import (
 
 // WorkflowInstance represents a workflow_instance
 type WorkflowInstance struct {
+	WorkflowDefinitionId string      `json:"workflow_definition_id"`
 	EntityId             string      `json:"entity_id"`
-	Status               interface{} `json:"status"`
 	CurrentStep          string      `json:"current_step,omitempty"`
+	Context              string      `json:"context,omitempty"`
 	InitiatedBy          string      `json:"initiated_by"`
 	CompletedAt          time.Time   `json:"completed_at,omitempty"`
-	AuditInfo            *AuditInfo  `json:"audit_info,omitempty"`
-	EntityType           string      `json:"entity_type"`
-	Context              string      `json:"context,omitempty"`
-	StartedAt            time.Time   `json:"started_at"`
 	Id                   string      `json:"id"`
-	WorkflowDefinitionId string      `json:"workflow_definition_id"`
+	EntityType           string      `json:"entity_type"`
+	Status               interface{} `json:"status"`
+	StartedAt            time.Time   `json:"started_at"`
+	AuditInfo            interface{} `json:"audit_info"`
 }

@@ -11,7 +11,7 @@ type EndorsementService struct {
 	Client Client
 }
 
-// RequestEndorsement RequestEndorsement
+// RequestEndorsement Request endorsement
 func (s *EndorsementService) RequestEndorsement(ctx context.Context, policyId string, req *models.RequestEndorsementRequest) (*models.RequestEndorsementResponse, error) {
 	path := "/v1/policies/{policy_id}/endorsements"
 	path = strings.ReplaceAll(path, "{policy_id}", policyId)
@@ -23,7 +23,7 @@ func (s *EndorsementService) RequestEndorsement(ctx context.Context, policyId st
 	return &result, nil
 }
 
-// ListEndorsements ListEndorsements
+// ListEndorsements List endorsements for policy
 func (s *EndorsementService) ListEndorsements(ctx context.Context, policyId string) (*models.EndorsementsListingResponse, error) {
 	path := "/v1/policies/{policy_id}/endorsements"
 	path = strings.ReplaceAll(path, "{policy_id}", policyId)
@@ -35,7 +35,7 @@ func (s *EndorsementService) ListEndorsements(ctx context.Context, policyId stri
 	return &result, nil
 }
 
-// GetEndorsement GetEndorsement
+// GetEndorsement Get endorsement
 func (s *EndorsementService) GetEndorsement(ctx context.Context, endorsementId string) (*models.EndorsementRetrievalResponse, error) {
 	path := "/v1/endorsements/{endorsement_id}"
 	path = strings.ReplaceAll(path, "{endorsement_id}", endorsementId)
@@ -47,7 +47,7 @@ func (s *EndorsementService) GetEndorsement(ctx context.Context, endorsementId s
 	return &result, nil
 }
 
-// ApproveEndorsement ApproveEndorsement
+// ApproveEndorsement Approve endorsement
 func (s *EndorsementService) ApproveEndorsement(ctx context.Context, endorsementId string, req *models.EndorsementApprovalRequest) (*models.EndorsementApprovalResponse, error) {
 	path := "/v1/endorsements/{endorsement_id}"
 	path = strings.ReplaceAll(path, "{endorsement_id}", endorsementId)

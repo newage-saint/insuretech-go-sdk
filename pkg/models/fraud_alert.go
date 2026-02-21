@@ -6,16 +6,16 @@ import (
 
 // FraudAlert represents a fraud_alert
 type FraudAlert struct {
-	FraudScore  int         `json:"fraud_score"`
-	AssignedTo  string      `json:"assigned_to,omitempty"`
 	Id          string      `json:"id"`
-	EntityType  string      `json:"entity_type"`
-	FraudRuleId string      `json:"fraud_rule_id"`
-	Details     string      `json:"details,omitempty"`
-	Status      interface{} `json:"status"`
-	ResolvedAt  time.Time   `json:"resolved_at,omitempty"`
-	AuditInfo   *AuditInfo  `json:"audit_info,omitempty"`
 	AlertNumber string      `json:"alert_number"`
 	EntityId    string      `json:"entity_id"`
+	FraudRuleId string      `json:"fraud_rule_id"`
 	RiskLevel   string      `json:"risk_level"`
+	FraudScore  int         `json:"fraud_score"`
+	Details     string      `json:"details,omitempty"`
+	Status      interface{} `json:"status"`
+	EntityType  string      `json:"entity_type"`
+	AssignedTo  string      `json:"assigned_to,omitempty"`
+	ResolvedAt  time.Time   `json:"resolved_at,omitempty"`
+	AuditInfo   interface{} `json:"audit_info"`
 }

@@ -10,4 +10,5 @@ const (
 	AuthnDeviceTypeDEVICETYPEMOBILEANDROID                 = "DEVICE_TYPE_MOBILE_ANDROID"
 	AuthnDeviceTypeDEVICETYPEMOBILEIOS                     = "DEVICE_TYPE_MOBILE_IOS"
 	AuthnDeviceTypeDEVICETYPEAPI                           = "DEVICE_TYPE_API"
+	AuthnDeviceTypeDEVICETYPEDESKTOP                       = "DEVICE_TYPE_DESKTOP"
 )

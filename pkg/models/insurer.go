@@ -6,22 +6,22 @@ import (
 
 // Insurer represents a insurer
 type Insurer struct {
-	WebsiteUrl         string       `json:"website_url,omitempty"`
-	Name               string       `json:"name"`
 	NameBn             string       `json:"name_bn,omitempty"`
-	Status             interface{}  `json:"status"`
-	TinNumber          string       `json:"tin_number,omitempty"`
-	RegisteredAddress  *Address     `json:"registered_address,omitempty"`
-	Type               *InsurerType `json:"type"`
-	TradeLicenseNumber string       `json:"trade_license_number,omitempty"`
-	ContactInfo        *ContactInfo `json:"contact_info,omitempty"`
-	HeadOfficeAddress  *Address     `json:"head_office_address,omitempty"`
+	HeadOfficeAddress  interface{}  `json:"head_office_address"`
 	LogoUrl            string       `json:"logo_url,omitempty"`
-	FinancialRating    string       `json:"financial_rating,omitempty"`
-	AuditInfo          *AuditInfo   `json:"audit_info,omitempty"`
+	WebsiteUrl         string       `json:"website_url,omitempty"`
+	Type               *InsurerType `json:"type"`
 	IdraLicenseExpiry  time.Time    `json:"idra_license_expiry,omitempty"`
-	PaidUpCapital      *Money       `json:"paid_up_capital,omitempty"`
-	Id                 string       `json:"id"`
+	AuditInfo          interface{}  `json:"audit_info"`
 	Code               string       `json:"code"`
+	Name               string       `json:"name"`
+	Status             interface{}  `json:"status"`
 	IdraLicenseNumber  string       `json:"idra_license_number,omitempty"`
+	ContactInfo        interface{}  `json:"contact_info"`
+	Id                 string       `json:"id"`
+	TradeLicenseNumber string       `json:"trade_license_number,omitempty"`
+	TinNumber          string       `json:"tin_number,omitempty"`
+	RegisteredAddress  interface{}  `json:"registered_address"`
+	FinancialRating    string       `json:"financial_rating,omitempty"`
+	PaidUpCapital      *Money       `json:"paid_up_capital,omitempty"`
 }

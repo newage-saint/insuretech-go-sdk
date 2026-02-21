@@ -6,14 +6,14 @@ import (
 
 // ClaimDocument represents a claim_document
 type ClaimDocument struct {
-	UpdatedAt    time.Time `json:"updated_at"`
-	DocumentId   string    `json:"document_id"`
-	FileUrl      string    `json:"file_url"`
-	CreatedAt    time.Time `json:"created_at"`
-	ClaimId      string    `json:"claim_id"`
-	DocumentType string    `json:"document_type"`
-	FileHash     string    `json:"file_hash"`
-	UploadedAt   time.Time `json:"uploaded_at"`
-	Verified     bool      `json:"verified"`
+	DocumentType string    `json:"document_type,omitempty"`
+	UploadedAt   time.Time `json:"uploaded_at,omitempty"`
+	DocumentId   string    `json:"document_id,omitempty"`
+	ClaimId      string    `json:"claim_id,omitempty"`
+	FileUrl      string    `json:"file_url,omitempty"`
+	FileHash     string    `json:"file_hash,omitempty"`
+	Verified     bool      `json:"verified,omitempty"`
 	VerifiedBy   string    `json:"verified_by,omitempty"`
+	CreatedAt    time.Time `json:"created_at,omitempty"`
+	UpdatedAt    time.Time `json:"updated_at,omitempty"`
 }

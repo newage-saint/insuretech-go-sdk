@@ -6,19 +6,19 @@ import (
 
 // KYCVerification represents a kyc_verification
 type KYCVerification struct {
-	Provider           string              `json:"provider,omitempty"`
-	VerificationResult string              `json:"verification_result,omitempty"`
-	VerifiedBy         string              `json:"verified_by,omitempty"`
-	ExpiresAt          time.Time           `json:"expires_at,omitempty"`
-	AuditInfo          *AuditInfo          `json:"audit_info,omitempty"`
-	RejectionReason    string              `json:"rejection_reason,omitempty"`
 	Type               *VerificationType   `json:"type"`
-	EntityType         string              `json:"entity_type"`
-	Method             *VerificationMethod `json:"method"`
 	ProviderReference  string              `json:"provider_reference,omitempty"`
+	VerificationResult string              `json:"verification_result,omitempty"`
+	ExpiresAt          time.Time           `json:"expires_at,omitempty"`
+	Method             *VerificationMethod `json:"method"`
+	RejectionReason    string              `json:"rejection_reason,omitempty"`
+	Provider           string              `json:"provider,omitempty"`
 	Documents          string              `json:"documents,omitempty"`
 	Status             interface{}         `json:"status"`
-	VerifiedAt         time.Time           `json:"verified_at,omitempty"`
+	VerifiedBy         string              `json:"verified_by,omitempty"`
 	Id                 string              `json:"id"`
+	EntityType         string              `json:"entity_type"`
 	EntityId           string              `json:"entity_id"`
+	VerifiedAt         time.Time           `json:"verified_at,omitempty"`
+	AuditInfo          interface{}         `json:"audit_info"`
 }

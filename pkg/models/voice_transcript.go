@@ -6,13 +6,13 @@ import (
 
 // VoiceTranscript represents a voice_transcript
 type VoiceTranscript struct {
-	Speaker        *SpeakerType `json:"speaker"`
-	Text           string       `json:"text"`
-	Confidence     float64      `json:"confidence,omitempty"`
-	Timestamp      time.Time    `json:"timestamp"`
-	AuditInfo      *AuditInfo   `json:"audit_info,omitempty"`
 	Id             string       `json:"id"`
-	VoiceSessionId string       `json:"voice_session_id"`
-	Language       string       `json:"language"`
+	Speaker        *SpeakerType `json:"speaker"`
+	Confidence     float64      `json:"confidence,omitempty"`
 	SequenceNumber int          `json:"sequence_number"`
+	Timestamp      time.Time    `json:"timestamp"`
+	VoiceSessionId string       `json:"voice_session_id"`
+	Text           string       `json:"text"`
+	Language       string       `json:"language"`
+	AuditInfo      interface{}  `json:"audit_info"`
 }

@@ -6,13 +6,13 @@ import (
 
 // AnomalyDetectedEvent represents a anomaly_detected_event
 type AnomalyDetectedEvent struct {
-	EventId        string                 `json:"event_id,omitempty"`
-	DeviceSerial   string                 `json:"device_serial,omitempty"`
-	AnomalyType    string                 `json:"anomaly_type,omitempty"`
-	Latitude       float64                `json:"latitude,omitempty"`
 	DeviceId       string                 `json:"device_id,omitempty"`
+	DeviceSerial   string                 `json:"device_serial,omitempty"`
 	Severity       string                 `json:"severity,omitempty"`
 	AnomalyDetails map[string]interface{} `json:"anomaly_details,omitempty"`
+	Latitude       float64                `json:"latitude,omitempty"`
+	EventId        string                 `json:"event_id,omitempty"`
+	AnomalyType    string                 `json:"anomaly_type,omitempty"`
 	Timestamp      time.Time              `json:"timestamp,omitempty"`
 	Longitude      float64                `json:"longitude,omitempty"`
 }

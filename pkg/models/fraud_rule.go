@@ -2,13 +2,13 @@ package models
 
 // FraudRule represents a fraud_rule
 type FraudRule struct {
-	Id          string          `json:"id"`
+	FraudRuleId string          `json:"fraud_rule_id"`
+	Description string          `json:"description,omitempty"`
 	Conditions  string          `json:"conditions"`
-	RiskLevel   *FraudRiskLevel `json:"risk_level"`
-	ScoreWeight int             `json:"score_weight"`
+	AuditInfo   interface{}     `json:"audit_info"`
 	Name        string          `json:"name"`
 	Category    *RuleCategory   `json:"category"`
-	Description string          `json:"description,omitempty"`
+	RiskLevel   *FraudRiskLevel `json:"risk_level"`
+	ScoreWeight int             `json:"score_weight"`
 	IsActive    bool            `json:"is_active,omitempty"`
-	AuditInfo   *AuditInfo      `json:"audit_info,omitempty"`
 }

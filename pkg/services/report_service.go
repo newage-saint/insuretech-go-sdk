@@ -11,30 +11,7 @@ type ReportService struct {
 	Client Client
 }
 
-// ListReportDefinitions ListReportDefinitions
-func (s *ReportService) ListReportDefinitions(ctx context.Context) (*models.ReportDefinitionsListingResponse, error) {
-	path := "/v1/report-definitions"
-	var result models.ReportDefinitionsListingResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// DownloadReport DownloadReport
-func (s *ReportService) DownloadReport(ctx context.Context, reportExecutionId string) (*models.ReportDownloadResponse, error) {
-	path := "/v1/report-executions/{report_execution_id}/download"
-	path = strings.ReplaceAll(path, "{report_execution_id}", reportExecutionId)
-	var result models.ReportDownloadResponse
-	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
-	if err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// GetReportExecution GetReportExecution
+// GetReportExecution Get report execution
 func (s *ReportService) GetReportExecution(ctx context.Context, reportExecutionId string) (*models.ReportExecutionRetrievalResponse, error) {
 	path := "/v1/report-executions/{report_execution_id}"
 	path = strings.ReplaceAll(path, "{report_execution_id}", reportExecutionId)
@@ -46,7 +23,7 @@ func (s *ReportService) GetReportExecution(ctx context.Context, reportExecutionI
 	return &result, nil
 }
 
-// ExecuteReport ExecuteReport
+// ExecuteReport Execute report
 func (s *ReportService) ExecuteReport(ctx context.Context, reportDefinitionId string, req *models.ReportExecutionRequest) (*models.ReportExecutionResponse, error) {
 	path := "/v1/reports/{report_definition_id}"
 	path = strings.ReplaceAll(path, "{report_definition_id}", reportDefinitionId)
@@ -58,10 +35,10 @@ func (s *ReportService) ExecuteReport(ctx context.Context, reportDefinitionId st
 	return &result, nil
 }
 
-// ListReportExecutions ListReportExecutions
-func (s *ReportService) ListReportExecutions(ctx context.Context) (*models.ReportExecutionsListingResponse, error) {
-	path := "/v1/report-executions"
-	var result models.ReportExecutionsListingResponse
+// ListReportDefinitions List report definitions
+func (s *ReportService) ListReportDefinitions(ctx context.Context) (*models.ReportDefinitionsListingResponse, error) {
+	path := "/v1/report-definitions"
+	var result models.ReportDefinitionsListingResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err
@@ -69,7 +46,7 @@ func (s *ReportService) ListReportExecutions(ctx context.Context) (*models.Repor
 	return &result, nil
 }
 
-// CreateReportSchedule CreateReportSchedule
+// CreateReportSchedule Create report schedule
 func (s *ReportService) CreateReportSchedule(ctx context.Context, req *models.ReportScheduleCreationRequest) (*models.ReportScheduleCreationResponse, error) {
 	path := "/v1/report-schedules"
 	var result models.ReportScheduleCreationResponse
@@ -80,10 +57,33 @@ func (s *ReportService) CreateReportSchedule(ctx context.Context, req *models.Re
 	return &result, nil
 }
 
-// ListReportSchedules ListReportSchedules
+// ListReportSchedules List report schedules
 func (s *ReportService) ListReportSchedules(ctx context.Context) (*models.ReportSchedulesListingResponse, error) {
 	path := "/v1/report-schedules"
 	var result models.ReportSchedulesListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// ListReportExecutions List report executions
+func (s *ReportService) ListReportExecutions(ctx context.Context) (*models.ReportExecutionsListingResponse, error) {
+	path := "/v1/report-executions"
+	var result models.ReportExecutionsListingResponse
+	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// DownloadReport Download report
+func (s *ReportService) DownloadReport(ctx context.Context, reportExecutionId string) (*models.ReportDownloadResponse, error) {
+	path := "/v1/report-executions/{report_execution_id}/download"
+	path = strings.ReplaceAll(path, "{report_execution_id}", reportExecutionId)
+	var result models.ReportDownloadResponse
 	err := s.Client.DoRequest(ctx, "GET", path, nil, &result)
 	if err != nil {
 		return nil, err

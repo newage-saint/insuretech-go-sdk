@@ -6,12 +6,12 @@ import (
 
 // FraudCheckResult represents a fraud_check_result
 type FraudCheckResult struct {
-	FraudScore   float64   `json:"fraud_score"`
+	ClaimId      string    `json:"claim_id,omitempty"`
+	FraudScore   float64   `json:"fraud_score,omitempty"`
 	RiskFactors  []string  `json:"risk_factors,omitempty"`
-	Flagged      bool      `json:"flagged"`
+	Flagged      bool      `json:"flagged,omitempty"`
 	ReviewedBy   string    `json:"reviewed_by,omitempty"`
 	ReviewedAt   time.Time `json:"reviewed_at,omitempty"`
-	CreatedAt    time.Time `json:"created_at"`
-	FraudCheckId string    `json:"fraud_check_id"`
-	ClaimId      string    `json:"claim_id"`
+	CreatedAt    time.Time `json:"created_at,omitempty"`
+	FraudCheckId string    `json:"fraud_check_id,omitempty"`
 }
